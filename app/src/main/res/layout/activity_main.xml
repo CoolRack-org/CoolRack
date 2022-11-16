@@ -9,12 +9,16 @@
     tools:context=".MainActivity"
     tools:ignore="HardcodedText">
 
-    <fragment
+<!--    <fragment-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        class="com.example.coolrack.Leyendo"-->
+<!--        android:id="@+id/fragment_leyendo"-->
+<!--        />-->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.coolrack.Leyendo"
-        android:id="@+id/fragment_leyendo"
-        />
+        android:id="@+id/frame_layout"/>
 
     <!-- this the navigation view which draws and shows the navigation drawer -->
     <!-- include the menu created in the menu folder -->

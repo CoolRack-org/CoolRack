@@ -1,21 +1,26 @@
 package com.example.coolrack;
 
-//import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    //menu
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+
+    //declaracion de fragmentos y transacion
+    //fragmentLeyendo == Fragmento inicial
+    FragmentTransaction transactioni;
+    Fragment fragmentLeyendo, fragmentInformacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView=(NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Creacion de objetos fragment y transaction
+        fragmentLeyendo = new Leyendo();
+        fragmentInformacion = new Informacion();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
+
     }
 
     // override the onOptionsItemSelected()
@@ -56,14 +68,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        transactioni = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId()){
             case R.id.nav_leyendo:
+                transactioni.replace(R.id.frame_layout,fragmentLeyendo).commit();
                 Toast.makeText(this,"Leyendo",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_biblioteca:
                 Toast.makeText(this,"Biblioteca",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_info:
+                transactioni.replace(R.id.frame_layout,fragmentInformacion).commit();
                 Toast.makeText(this,"informacion",Toast.LENGTH_LONG).show();
                 break;
         }
