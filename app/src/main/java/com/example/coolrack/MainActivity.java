@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         // to make the Navigation drawer icon always appear on the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NavigationView navigationView=(NavigationView) findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     // override the onOptionsItemSelected()
@@ -47,4 +53,21 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.nav_leyendo:
+                Toast.makeText(this,"Leyendo",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_biblioteca:
+                Toast.makeText(this,"Biblioteca",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_info:
+                Toast.makeText(this,"informacion",Toast.LENGTH_LONG).show();
+                break;
+        }
+
+        return false;
+    }
 }
