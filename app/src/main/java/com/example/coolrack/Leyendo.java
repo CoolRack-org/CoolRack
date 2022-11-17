@@ -34,11 +34,11 @@ public class Leyendo extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Leyendo.
+     * @return A new instance of fragment Informacion.
      */
     // TODO: Rename and change types and number of parameters
-    public static Leyendo newInstance(String param1, String param2) {
-        Leyendo fragment = new Leyendo();
+    public static Informacion newInstance(String param1, String param2) {
+        Informacion fragment = new Informacion();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
