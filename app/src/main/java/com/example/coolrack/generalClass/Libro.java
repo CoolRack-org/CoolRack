@@ -23,10 +23,11 @@ public class Libro {
         this.identifier = identifier;
         this.img = img;
     }
-    public Libro(String title, String author, String serie, int img) {
+    public Libro(String title, String author, String serie,String format, int img) {
         this.title = title;
         this.author = author;
         this.serie = serie;
+        this.format = format;
         this.img = img;
     }
     public Libro() {}
