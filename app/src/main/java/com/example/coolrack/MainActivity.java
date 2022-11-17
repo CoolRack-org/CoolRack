@@ -51,11 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    // override the onOptionsItemSelected()
-    // function to implement
-    // the item click listener callback
-    // to open and close the navigation
-    // drawer when the icon is clicked
+    // Cierra el menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -65,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    //permite la navegacion a las opciones del menu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
