@@ -18,9 +18,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
     //declaracion de fragmentos y transacion
+    //despues se definiran con su respectiva clase para la navegacion
     //fragmentLeyendo == Fragmento inicial
     FragmentTransaction transactioni;
-    Fragment fragmentLeyendo, fragmentInformacion;
+    Fragment fragmentLeyendo, fragmentBiblioteca, fragmentInformacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //Creacion de objetos fragment y transaction
+        //esto despues se carga en el metedo onNavigationItemSelect para el cambio de dicho fragmento
         fragmentLeyendo = new Leyendo();
         fragmentInformacion = new Informacion();
+        fragmentBiblioteca = new Biblioteca();
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Leyendo",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_biblioteca:
+                transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();
                 Toast.makeText(this,"Biblioteca",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_info:
