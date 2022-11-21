@@ -18,7 +18,7 @@ import nl.siegmann.epublib.domain.Book;
 public class Leyendo extends Fragment {
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
-    ArrayList<Book> listBook;
+    ArrayList<Libro> listBook;
 
     public Leyendo() {}
 
@@ -40,18 +40,8 @@ public class Leyendo extends Fragment {
 
     //Carga los datos de los libros a mostrar en la lista de libros
     public void cargarLista(){
-        /*listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
-        listBook.add(new Libro("Libro2","jose","Los mataSanos1","Text",R.drawable.ic_launcher_foreground));
-        listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));
-        listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
-        listBook.add(new Libro("Libro2","jose","Los mataSanos1","Text",R.drawable.ic_launcher_foreground));
-        listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));
-        listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
-        listBook.add(new Libro("Libro2","jose","Los mataSanos1","Text",R.drawable.ic_launcher_foreground));
-        listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));*/
-
         GenerateBooks gb = new GenerateBooks();
-        listBook = gb.getLibros();
+        this.listBook = gb.getLibros();
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
