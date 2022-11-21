@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
+import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
 
 import java.util.ArrayList;
+
+import nl.siegmann.epublib.domain.Book;
 
 public class Biblioteca extends Fragment {
 
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
-    ArrayList<Libro> listBook;
+    ArrayList<Book> listBook;
 
     public Biblioteca() {}
 
@@ -38,7 +41,8 @@ public class Biblioteca extends Fragment {
     }
 
     public void cargarLista(){
-        listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
+
+       /* listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
         listBook.add(new Libro("Libro2","jose","Los mataSanos1","Text",R.drawable.ic_launcher_foreground));
         listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));
         listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
@@ -46,7 +50,10 @@ public class Biblioteca extends Fragment {
         listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));
         listBook.add(new Libro("Libro1","jose","Los mataSanos","Text",R.drawable.ic_launcher_background));
         listBook.add(new Libro("Libro2","jose","Los mataSanos1","Text",R.drawable.ic_launcher_foreground));
-        listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));
+        listBook.add(new Libro("Libro3","jose","Los mataSanos2","Text",R.drawable.ic_launcher_background));*/
+
+        GenerateBooks gb = new GenerateBooks();
+        gb.getLibros();
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
