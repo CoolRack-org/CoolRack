@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Modelo Base de datos Book-->
+<resources>
+    <book leyendo="false">
+        <titulo></titulo>
+        <autor></autor>
+        <imagen></imagen>
+        <serie></serie>
+        <lenguaje></lenguaje>
+        <identifier></identifier>
+        <format></format>
+        <url></url>
+        <anotation>
+            <note></note>
+            <note></note>
+        </anotation>
+    </book>
+</resources>
