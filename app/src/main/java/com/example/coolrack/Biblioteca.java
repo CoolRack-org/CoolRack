@@ -20,7 +20,7 @@ public class Biblioteca extends Fragment {
 
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
-    ArrayList<Libro> listBook;
+    ArrayList<Book> listBook;
 
     public Biblioteca() {}
 

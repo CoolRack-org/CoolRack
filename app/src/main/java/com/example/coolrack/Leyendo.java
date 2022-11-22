@@ -18,7 +18,7 @@ import nl.siegmann.epublib.domain.Book;
 public class Leyendo extends Fragment {
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
-    ArrayList<Libro> listBook;
+    ArrayList<Book> listBook;
 
     public Leyendo() {}
 

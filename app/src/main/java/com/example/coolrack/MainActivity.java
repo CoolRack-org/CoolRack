@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //despues se definiran con su respectiva clase para la navegacion
     //fragmentLeyendo == Fragmento inicial
     FragmentTransaction transactioni;
-    Fragment fragmentLeyendo, fragmentBiblioteca, fragmentInformacion;
+    Fragment /*fragmentLeyendo,*/ fragmentBiblioteca, fragmentInformacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Creacion de objetos fragment y transaction
         //esto despues se carga en el metedo onNavigationItemSelect para el cambio de dicho fragmento
-        fragmentLeyendo = new Leyendo();
+//        fragmentLeyendo = new Leyendo();
         fragmentInformacion = new Informacion();
         fragmentBiblioteca = new Biblioteca();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentBiblioteca).commit();//fragmentLeyendo).commit();
 
     }
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transactioni = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId()){
             case R.id.nav_leyendo:
-                transactioni.replace(R.id.frame_layout,fragmentLeyendo).commit();
+                transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();//fragmentLeyendo).commit();
                 Toast.makeText(this,"Leyendo",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_biblioteca:
