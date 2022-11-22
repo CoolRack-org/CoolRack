@@ -1,5 +1,7 @@
 package com.example.coolrack.generalClass;
 
+import nl.siegmann.epublib.domain.Book;
+
 public class Libro {
     private String title;
     private String author;
@@ -9,11 +11,12 @@ public class Libro {
     private String identifier;
     private String url;
     private String format;
+    private boolean leyendo;
     private int img;
 
 
 
-    public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier, int img) {
+    public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier,boolean leyendo, int img) {
         this.title = title;
         this.author = author;
         this.anotation = anotation;
@@ -21,6 +24,7 @@ public class Libro {
         this.serie = serie;
         this.format = format;
         this.identifier = identifier;
+        this.leyendo = leyendo;
         this.img = img;
     }
     public Libro(String title, String author, String serie,String format, int img) {
@@ -103,5 +107,13 @@ public class Libro {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public boolean getLeyendo() {
+        return leyendo;
+    }
+
+    public void setLeyendo(boolean leyendo) {
+        this.leyendo = leyendo;
     }
 }
