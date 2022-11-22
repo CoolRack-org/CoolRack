@@ -46,7 +46,7 @@ public class GenerateBooks {
     public ArrayList<Book> getLibros() {
         ArrayList<Book> listBook = null;
 
-        //try {
+        try {
         listBook = new ArrayList<>();
         //saca la ruta de Descargas y lo usa en el objeto dir
         String path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
@@ -71,21 +71,12 @@ public class GenerateBooks {
             }
         })){
             try {
+
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
 
-//                l.setTitle(b.getTitle());
-//                l.setAuthor(b.getMetadata().getAuthors()+"");
-//                l.setFormat(b.getMetadata().getFormat());
-//                l.setImg(R.drawable.ic_launcher_background);
-//                l.setSerie("testSerie"); //TEMPORAL
-//                l.setUrl(f.getAbsolutePath());
-
-
-
                 listBook.add(b);
                 System.out.println(f.getAbsolutePath());
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -93,11 +84,11 @@ public class GenerateBooks {
 
         }
 
-        //}catch (Exception e){
-        //    e.printStackTrace();
-        //}finally {
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
         return listBook;
-        // }
+        }
 
     }
 }

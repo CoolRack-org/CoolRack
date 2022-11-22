@@ -42,16 +42,10 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         String titulo = String.valueOf(model.get(position).getMetadata().getTitles());
         String autor = String.valueOf(model.get(position).getMetadata().getAuthors());
         String formato = model.get(position).getMetadata().getFormat();
         Resource imagen = model.get(position).getCoverImage();
-
-//        String titulo = model.get(position).getTitle();
-//        String autor = model.get(position).getAuthor()+", "+model.get(position).getSerie();
-//        String formato = model.get(position).getFormat();
-//        int imagen = model.get(position).getImg();
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
