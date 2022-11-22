@@ -5,6 +5,7 @@ import android.os.Environment;
 import com.example.coolrack.R;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,8 +43,8 @@ public class GenerateBooks {
         this.filtro = filtro;
     }
 
-    public ArrayList<Libro> getLibros() {
-        ArrayList<Libro> listBook = null;
+    public ArrayList<Book> getLibros() {
+        ArrayList<Book> listBook = null;
 
         //try {
         listBook = new ArrayList<>();
@@ -52,19 +53,37 @@ public class GenerateBooks {
         File dir = new File(path);
 
         EpubReader er = new EpubReader();
-        for (File f :dir.listFiles()){
+        for (File f :dir.listFiles(new FileFilter() {
+            //Filtro que solo deja pasar los file que tengam formato epub
+            //los otros los desecha y no son tomados en cuenta para el programa;
+            @Override
+            public boolean accept(File file) {
+                StringBuilder sb = new StringBuilder(file.getAbsolutePath());
+                String format = String.valueOf(sb.reverse());
+                format = format.substring(0,5);
+                sb = new StringBuilder(format);
+                format = String.valueOf(sb.reverse());
+
+                if(format == ".epub")
+                    return false;
+                else
+                    return true;
+            }
+        })){
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
 
-                l.setTitle(b.getTitle());
-                l.setAuthor(b.getMetadata().getAuthors()+"");
-                l.setFormat(b.getMetadata().getFormat());
-                l.setImg(R.drawable.ic_launcher_background);
-                l.setSerie("testSerie"); //TEMPORAL
-                l.setUrl(f.getAbsolutePath());
+//                l.setTitle(b.getTitle());
+//                l.setAuthor(b.getMetadata().getAuthors()+"");
+//                l.setFormat(b.getMetadata().getFormat());
+//                l.setImg(R.drawable.ic_launcher_background);
+//                l.setSerie("testSerie"); //TEMPORAL
+//                l.setUrl(f.getAbsolutePath());
 
-                listBook.add(l);
+
+
+                listBook.add(b);
                 System.out.println(f.getAbsolutePath());
 
 

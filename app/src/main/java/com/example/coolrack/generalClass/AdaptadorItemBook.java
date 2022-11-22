@@ -14,15 +14,18 @@ import com.example.coolrack.R;
 
 import java.util.ArrayList;
 
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.domain.Resource;
+
 public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.ViewHolder> implements View.OnClickListener{
 
     private LayoutInflater inflater;
-    private ArrayList<Libro> model;
+    private ArrayList<Book> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdaptadorItemBook(Context context, ArrayList<Libro> model){
+    public AdaptadorItemBook(Context context, ArrayList<Book> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -38,15 +41,22 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     //asignacion de valores al item mediante el ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String titulo = model.get(position).getTitle();
-        String autor = model.get(position).getAuthor()+", "+model.get(position).getSerie();
-        String formato = model.get(position).getFormat();
-        int imagen = model.get(position).getImg();
+
+
+        String titulo = String.valueOf(model.get(position).getMetadata().getTitles());
+        String autor = String.valueOf(model.get(position).getMetadata().getAuthors());
+        String formato = model.get(position).getMetadata().getFormat();
+        Resource imagen = model.get(position).getCoverImage();
+
+//        String titulo = model.get(position).getTitle();
+//        String autor = model.get(position).getAuthor()+", "+model.get(position).getSerie();
+//        String formato = model.get(position).getFormat();
+//        int imagen = model.get(position).getImg();
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
         holder.formato.setText(formato);
-        holder.imagen.setImageResource(imagen);
+        //holder.imagen.setImageResource(imagen);
     }
 
     @Override
