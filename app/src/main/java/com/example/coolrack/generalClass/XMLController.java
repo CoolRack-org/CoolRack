@@ -39,7 +39,6 @@ public class XMLController {
         }
 
 
-
     }
 
     public ArrayList<Book> getBooks(){
