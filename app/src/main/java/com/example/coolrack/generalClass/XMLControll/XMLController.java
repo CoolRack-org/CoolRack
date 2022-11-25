@@ -156,7 +156,7 @@ public class XMLController {
                     if (tipo==2 && leyendo){
                         lista.add(this.getValues(parser,eElement));
                     }
-                    else if (tipo == 1 && leyendo == false){
+                    else if (tipo == 1){
                         lista.add(this.getValues(parser,eElement));
                     }
                 }
@@ -171,8 +171,6 @@ public class XMLController {
 
     private Libro getValues(ParserDOM parser, Element eElement){
         Libro l = new Libro();
-        if (parser.getValue(eElement,"titulo").equals("Las_madres"))
-            l.setLeyendo(true);
         l.setTitle(parser.getValue(eElement,"titulo"));
         l.setAuthor(parser.getValue(eElement,"autor"));
         l.setUrl(parser.getValue(eElement,"url"));

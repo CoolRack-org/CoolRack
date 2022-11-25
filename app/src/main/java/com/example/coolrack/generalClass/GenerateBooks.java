@@ -49,6 +49,8 @@ public class GenerateBooks {
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
+                if (b.getTitle().equals("Canallas"))
+                    l.setLeyendo(true);
 
                 l.setTitle(b.getTitle());
                 l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname()+" "+b.getMetadata().getAuthors().get(0).getLastname());
