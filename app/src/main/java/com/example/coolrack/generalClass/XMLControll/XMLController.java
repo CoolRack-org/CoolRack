@@ -181,15 +181,15 @@ public class XMLController {
 
 
 
-//    public void addBook(Libro l){
-//        try {
-//            ArrayList<Libro> lista = this.getBooks();
-//            lista.add(l);
-//            this.createXML(lista);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
+    public void addBook(Libro l,Context context){
+        try {
+            ArrayList<Libro> lista = this.getBooks(context,1);
+            lista.add(l);
+            this.createXML(lista,context);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }
