@@ -20,12 +20,12 @@ import nl.siegmann.epublib.domain.Resource;
 public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.ViewHolder> implements View.OnClickListener{
 
     private LayoutInflater inflater;
-    private ArrayList<Book> model;
+    private ArrayList<Libro> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdaptadorItemBook(Context context, ArrayList<Book> model){
+    public AdaptadorItemBook(Context context, ArrayList<Libro> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -42,10 +42,10 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String titulo = String.valueOf(model.get(position).getMetadata().getTitles());
-        String autor = String.valueOf(model.get(position).getMetadata().getAuthors());
-        String formato = model.get(position).getMetadata().getFormat();
-        Resource imagen = model.get(position).getCoverImage();
+        String titulo = model.get(position).getTitle();
+        String autor = model.get(position).getAuthor();
+        String formato = model.get(position).getFormat();
+        //Resource imagen = model.get(position).getImg();
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);

@@ -5,7 +5,7 @@ import nl.siegmann.epublib.domain.Book;
 public class Libro {
     private String title;
     private String author;
-    private String anotation;
+    //private String anotation;
     private String serie;
     private String language;
     private String identifier;
@@ -19,7 +19,7 @@ public class Libro {
     public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier,boolean leyendo, int img) {
         this.title = title;
         this.author = author;
-        this.anotation = anotation;
+        //this.anotation = anotation;
         this.language = language;
         this.serie = serie;
         this.format = format;
@@ -53,13 +53,13 @@ public class Libro {
         this.author = author;
     }
 
-    public String getAnotation() {
-        return anotation;
-    }
-
-    public void setAnotation(String anotation) {
-        this.anotation = anotation;
-    }
+//    public String getAnotation() {
+//        return anotation;
+//    }
+//
+//    public void setAnotation(String anotation) {
+//        this.anotation = anotation;
+//    }
 
     public String getLanguage() {
         return language;

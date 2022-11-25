@@ -15,36 +15,11 @@ import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubReader;
 
 public class GenerateBooks {
-    private String url;
-    private String filtro;
 
     public GenerateBooks(){}
-    public GenerateBooks(String url) {
-        this.url = url;
-    }
-    public GenerateBooks(String url, String filtro) {
-        this.url = url;
-        this.filtro = filtro;
-    }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getFiltro() {
-        return filtro;
-    }
-
-    public void setFiltro(String filtro) {
-        this.filtro = filtro;
-    }
-
-    public ArrayList<Book> getLibros() {
-        ArrayList<Book> listBook = null;
+    public ArrayList<Libro> getLibros() {
+        ArrayList<Libro> listBook = null;
 
         try {
         listBook = new ArrayList<>();
@@ -53,7 +28,7 @@ public class GenerateBooks {
         File dir = new File(path);
 
         EpubReader er = new EpubReader();
-        for (File f :dir.listFiles(new FileFilter() {
+        for (File f :dir.listFiles()/*dir.listFiles(new FileFilter() {
             //Filtro que solo deja pasar los file que tengam formato epub
             //los otros los desecha y no son tomados en cuenta para el programa;
             @Override
@@ -69,16 +44,26 @@ public class GenerateBooks {
                 else
                     return true;
             }
-        })){
-            try {
+        })*/){
 
+            try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
 
-                listBook.add(b);
+                l.setTitle(b.getTitle());
+                l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname()+" "+b.getMetadata().getAuthors().get(0).getLastname());
+                //l.setSerie();
+                l.setLanguage(b.getMetadata().getLanguage());
+                l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
+                l.setUrl(f.getAbsolutePath());
+                l.setFormat(b.getMetadata().getFormat());
+
+                listBook.add(l);
                 System.out.println(f.getAbsolutePath());
 
             } catch (IOException e) {
+                e.printStackTrace();
+            }catch (Exception e){
                 e.printStackTrace();
             }
 

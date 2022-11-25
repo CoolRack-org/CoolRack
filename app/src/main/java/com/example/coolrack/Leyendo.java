@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.XMLControll.XMLController;
+
 import java.util.ArrayList;
 
 import nl.siegmann.epublib.domain.Book;
@@ -18,7 +20,8 @@ import nl.siegmann.epublib.domain.Book;
 public class Leyendo extends Fragment {
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
-    ArrayList<Book> listBook;
+    ArrayList<Libro> listBook;
+
 
     public Leyendo() {}
 
@@ -40,8 +43,8 @@ public class Leyendo extends Fragment {
 
     //Carga los datos de los libros a mostrar en la lista de libros
     public void cargarLista(){
-        GenerateBooks gb = new GenerateBooks();
-        this.listBook = gb.getLibros();
+        XMLController xmlController = new XMLController();
+        this.listBook = xmlController.getBooks(this.getContext(),2);
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
