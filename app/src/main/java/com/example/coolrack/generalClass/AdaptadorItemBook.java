@@ -1,6 +1,8 @@
 package com.example.coolrack.generalClass;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.opengl.Matrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +47,12 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String titulo = model.get(position).getTitle();
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
-        //Resource imagen = model.get(position).getImg();
+        int imagen = model.get(position).getImg();
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
         holder.formato.setText(formato);
-        //holder.imagen.setImageResource(imagen);
+        holder.imagen.setImageResource(imagen);
     }
 
     @Override

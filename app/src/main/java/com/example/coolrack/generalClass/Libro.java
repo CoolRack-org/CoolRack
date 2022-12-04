@@ -1,8 +1,13 @@
 package com.example.coolrack.generalClass;
 
-import nl.siegmann.epublib.domain.Book;
+import android.graphics.Bitmap;
 
-public class Libro {
+import java.io.Serializable;
+
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.domain.Resource;
+
+public class Libro  implements Serializable {
     private String title;
     private String author;
     //private String anotation;
@@ -16,7 +21,7 @@ public class Libro {
 
 
 
-    public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier,boolean leyendo, int img) {
+    /*public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier,boolean leyendo, int img) {
         this.title = title;
         this.author = author;
         //this.anotation = anotation;
@@ -27,13 +32,13 @@ public class Libro {
         this.leyendo = leyendo;
         this.img = img;
     }
-    public Libro(String title, String author, String serie,String format, int img) {
+    public Libro(String title, String author, String serie,String format, Resource img) {
         this.title = title;
         this.author = author;
         this.serie = serie;
         this.format = format;
         this.img = img;
-    }
+    }*/
     public Libro() {}
 
 
