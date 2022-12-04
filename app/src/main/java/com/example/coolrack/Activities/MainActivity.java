@@ -71,6 +71,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
 
+        try {
+            Bundle bundle = getIntent().getExtras();
+            int ID_BACK = (int) bundle.getSerializable("direccionAnterior");
+
+            if (ID_BACK != 0){
+                gestorTransiciones(ID_BACK);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("no existe Activity anterior");
+        }
+
+
     }
 
     // Cierra el menu
@@ -86,24 +100,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //permite la navegacion a las opciones del menu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        gestorTransiciones(item.getItemId());
+        return false;
+    }
 
+    public void gestorTransiciones(int id){
         transactioni = getSupportFragmentManager().beginTransaction();
-        switch (item.getItemId()){
+        switch (id){
             case R.id.nav_leyendo:
                 transactioni.replace(R.id.frame_layout,fragmentLeyendo).commit();
-                Toast.makeText(this,"Leyendo",Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_biblioteca:
-                transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();
-                Toast.makeText(this,"Biblioteca",Toast.LENGTH_LONG).show();
+                transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();;
                 break;
             case R.id.nav_info:
-                transactioni.replace(R.id.frame_layout,fragmentInformacion).commit();
-                Toast.makeText(this,"informacion",Toast.LENGTH_LONG).show();
+                transactioni.replace(R.id.frame_layout,fragmentInformacion).commit();;
                 break;
         }
-
-        return false;
     }
 
 

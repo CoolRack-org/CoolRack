@@ -1,8 +1,12 @@
 package com.example.coolrack.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +14,8 @@ import com.example.coolrack.R;
 import com.example.coolrack.generalClass.Libro;
 
 public class PerfilLibro extends AppCompatActivity {
+    private Libro libro = null;
+    private int DIRECCION_ANTERIOR = 0;
     private  String direccion = "";
 
     @Override
@@ -17,12 +23,18 @@ public class PerfilLibro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_libro);
 
-        Bundle bundle = getIntent().getExtras();
-        Libro libro = (Libro) bundle.getSerializable("objetoLibro");
+        // Crea un boton con forma de flecha el la toolbar
+        // esta se usara para retroceder
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // carga el pojo enviado por  la Actividad/fragmento que cargo esta Activity anteriormente
+        Bundle bundle = getIntent().getExtras();
+        this.libro = (Libro) bundle.getSerializable("objetoLibro");
         this.setTitle(libro.getTitle());
 
+        // Carga los datos del pojo para para poder verse
         cargarDatos(libro);
+        this.DIRECCION_ANTERIOR = (int) bundle.getSerializable("direccionAnterior");
 
     }
 
@@ -48,6 +60,18 @@ public class PerfilLibro extends AppCompatActivity {
         url.setText(l.getUrl());
         imagen.setImageResource(l.getImg());
 
+    }
 
+    // Redirecciona al usuario dependiendo de la opcion selecionada en la toolbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+        // Respond to the action bar's Up/Home button
+        case android.R.id.home:
+            startActivity(new Intent(this,MainActivity.class).putExtra("direccionAnterior",this.DIRECCION_ANTERIOR));
+            //NavUtils.navigateUpFromSameTask(this);
+            return true;
+    }
+        return super.onOptionsItemSelected(item);
     }
 }

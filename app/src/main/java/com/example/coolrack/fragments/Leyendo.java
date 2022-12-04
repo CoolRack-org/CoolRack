@@ -63,7 +63,7 @@ public class Leyendo extends Fragment {
             public void onClick(View view) {
                 Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
                 // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
-                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class).putExtra("objetoLibro",  libro));
+                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class).putExtra("objetoLibro",  libro).putExtra("direccionAnterior",R.id.nav_leyendo));
             }
         });
     }
