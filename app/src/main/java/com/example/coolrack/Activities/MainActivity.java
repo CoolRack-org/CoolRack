@@ -1,4 +1,4 @@
-package com.example.coolrack;
+package com.example.coolrack.Activities;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,6 +11,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.coolrack.fragments.Biblioteca;
+import com.example.coolrack.fragments.Informacion;
+import com.example.coolrack.fragments.Leyendo;
+import com.example.coolrack.R;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
 import com.google.android.material.navigation.NavigationView;

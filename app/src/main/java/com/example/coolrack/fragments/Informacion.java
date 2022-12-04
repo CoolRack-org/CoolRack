@@ -1,4 +1,4 @@
-package com.example.coolrack;
+package com.example.coolrack.fragments;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.coolrack.R;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
