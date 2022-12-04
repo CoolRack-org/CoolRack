@@ -2,6 +2,7 @@ package com.example.coolrack.generalClass.XMLControll;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
 import android.util.Xml;
 
 import com.example.coolrack.generalClass.Libro;
@@ -65,14 +66,13 @@ public class XMLController {
 
                 String titulo = l.getTitle();
                 String autor = l.getAuthor();
-                //String imagen = l.getImg();
+                int imagen = l.getImg();
                 //String serie = l.getSerie();
                 String lenguaje = l.getLanguage();
                 String identifier = l.getIdentifier();
                 String format = l.getFormat();
                 String url = l.getUrl();
                 String leyendo = String.valueOf(l.getLeyendo());
-                //String leyendo ="true";
 
                 xmlSerializer.startTag("","book");
 
@@ -84,8 +84,8 @@ public class XMLController {
                 xmlSerializer.text(autor);
                 xmlSerializer.endTag("","autor");
 
-                /*xmlSerializer.startTag("","imagen");
-                xmlSerializer.text(imagen); //Falta Implementar
+/*                xmlSerializer.startTag("","imagen");
+                xmlSerializer.text(String.valueOf(imagen)); //Falta Implementar
                 xmlSerializer.endTag("","imagen");
 
                 xmlSerializer.startTag("","serie");
@@ -173,15 +173,20 @@ public class XMLController {
         Libro l = new Libro();
         l.setTitle(parser.getValue(eElement,"titulo"));
         l.setAuthor(parser.getValue(eElement,"autor"));
+        //l.setSerie();
+        l.setLanguage(parser.getValue(eElement,"lenguaje"));
+        l.setIdentifier(parser.getValue(eElement,"identifier"));
         l.setUrl(parser.getValue(eElement,"url"));
         l.setFormat(parser.getValue(eElement,"format"));
+        l.setLeyendo(Boolean.valueOf(parser.getValue(eElement, "leyendo")));
+        //l.setImg(Bitmap.(parser.getValue(eElement, "imagen")));
 
         return l;
     }
 
 
 
-    public void addBook(Libro l,Context context){
+    public void addBook(Libro l, Context context){
         try {
             ArrayList<Libro> lista = this.getBooks(context,1);
             lista.add(l);
@@ -190,6 +195,22 @@ public class XMLController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void editBook(Libro editeBook, Context context){
+        try {
+            ArrayList<Libro> lista = this.getBooks(context,1);
+
+            for (int i=0; i<lista.size(); i++){
+                String id = lista.get(i).getIdentifier();
+                if (id.equals(editeBook.getIdentifier()) ){
+                    lista.set(i,editeBook);
+                    this.createXML(lista, context);
+                    break;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
