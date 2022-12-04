@@ -10,7 +10,7 @@ import com.example.coolrack.R;
 import com.example.coolrack.generalClass.Libro;
 
 public class PerfilLibro extends AppCompatActivity {
-    String direccion = "";
+    private  String direccion = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +18,11 @@ public class PerfilLibro extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_libro);
 
         Bundle bundle = getIntent().getExtras();
-        //Libro libro = (Libro) bundle.getSerializable("objetoLibro");
-        cargarDatos((Libro) bundle.getSerializable("objetoLibro"));
+        Libro libro = (Libro) bundle.getSerializable("objetoLibro");
+
+        this.setTitle(libro.getTitle());
+
+        cargarDatos(libro);
 
     }
 
@@ -33,6 +36,8 @@ public class PerfilLibro extends AppCompatActivity {
         TextView identificador = (TextView) findViewById( R.id.identificador_perfil);
         TextView url = (TextView) findViewById( R.id.url_perfil);
         ImageView imagen = (ImageView) findViewById( R.id.imagen_Perfil);
+
+        this.direccion = l.getUrl();
 
         // setea los datos
         titulo.setText(l.getTitle());

@@ -29,8 +29,7 @@ public class Leyendo extends Fragment {
     public Leyendo() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_leyendo, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -40,6 +39,8 @@ public class Leyendo extends Fragment {
         cargarLista();
         //mostrar data
         mostrarData();
+
+        this.getActivity().setTitle("Leyendo");
 
         return view;
     }

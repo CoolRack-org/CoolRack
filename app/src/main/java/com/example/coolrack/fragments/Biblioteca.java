@@ -38,6 +38,8 @@ public class Biblioteca extends Fragment {
         //mostrar data
         mostrarData();
 
+        this.getActivity().setTitle("Biblioteca");
+
         return view;
     }
 
