@@ -1,5 +1,6 @@
 package com.example.coolrack.generalClass;
 
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.example.coolrack.R;
@@ -49,7 +50,7 @@ public class GenerateBooks {
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
-                if (b.getTitle().equals("Canallas"))
+                if (b.getTitle().equals("Las madres"))
                     l.setLeyendo(true);
 
                 l.setTitle(b.getTitle());
@@ -59,6 +60,7 @@ public class GenerateBooks {
                 l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
                 l.setUrl(f.getAbsolutePath());
                 l.setFormat(b.getMetadata().getFormat());
+                l.setImg(b.getCoverImage().getInputStream().read());
 
                 listBook.add(l);
                 System.out.println(f.getAbsolutePath());

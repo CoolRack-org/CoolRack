@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    //Pide los permisos necesarios para el comodo funcionamiento del programa al usuario
     private void verificarPermisos(){
 //        int permisosWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 //        int permisosRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);

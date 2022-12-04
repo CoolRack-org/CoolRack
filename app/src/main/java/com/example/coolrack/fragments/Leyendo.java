@@ -1,5 +1,6 @@
 package com.example.coolrack.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,10 +56,13 @@ public class Leyendo extends Fragment {
         adapterItem = new AdaptadorItemBook(getContext(),listBook);
         recyclerView.setAdapter(adapterItem);
 
+        //Te redirecciona al perfil del usuario (Activity)
         adapterItem.setOnclickLister(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"hola",Toast.LENGTH_LONG).show();
+                Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
+                // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
+                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class).putExtra("objetoLibro",  libro));
             }
         });
     }
