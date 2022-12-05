@@ -1,9 +1,14 @@
 package com.example.coolrack.Activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,8 +24,10 @@ import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
 import com.google.android.material.navigation.NavigationView;
 
+import nl.siegmann.epublib.domain.ManifestItemProperties;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    //marca de confirmacion permisos
+    //valor que indica si el usuario acepto el permiso
     int REQUEST_CODE = 200;
 
     //menu
@@ -34,18 +41,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction transactioni;
     Fragment fragmentLeyendo, fragmentBiblioteca, fragmentInformacion;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //verifica si la aplicacion tiene permisos, si no los tiene los pide y asigna
+        verificarPermisos();
 
         GenerateBooks gb = new GenerateBooks();
         XMLController pepe = new XMLController();
-        pepe.createXML(gb.getLibros(),this.getApplicationContext());
+        pepe.createXML(gb.getLibros(this.getApplicationContext()),this.getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //verifica si la aplicacion tiene permisos, si no los tiene los pide y asigna
-        verificarPermisos();
 
         // drawer layout instance to toggle the menu icon to open
         // drawer and back button to close drawer
@@ -120,19 +127,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    //Pide los permisos necesarios para el comodo funcionamiento del programa al usuario
+    // Pide los permisos necesarios para el comodo funcionamiento del programa al usuario.
+    // Los permisos necesarios para el completo funcionamiento del programa es para
+    // buscar y guardar los nuevos libros descargados y no tener que cargarlo uno a uno
+    @RequiresApi(api = Build.VERSION_CODES.R)
     private void verificarPermisos(){
-//        int permisosWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        int permisosRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-//
-//        int x= ContextCompat.checkSelfPermission(this.manif)
-//        requestPermissions(new String[]{Manifest.permission.MANAGE_DOCUMENTS},REQUEST_CODE);
-//
-//        if ()
-//        if (permisosWrite == PackageManager.PERMISSION_GRANTED && permisosRead == PackageManager.PERMISSION_GRANTED){
-//            Toast.makeText(this,"Permiso Concedido",Toast.LENGTH_LONG).show();
-//        }else {
-//            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
-//        }
+        int permisosManagerExternalStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+        int permisosWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisosRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (permisosWrite != PackageManager.PERMISSION_GRANTED && permisosRead != PackageManager.PERMISSION_GRANTED  && permisosManagerExternalStorage != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE},REQUEST_CODE);
+        }
    }
 }
