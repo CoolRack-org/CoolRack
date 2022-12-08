@@ -66,7 +66,7 @@ public class GenerateBooks {
                 l.setImg(b.getCoverImage().getInputStream().read());
 
                 listBook.add(l);
-                createBook(b,context);
+                createBook(b,f.getName(),context);
                 System.out.println(f.getAbsolutePath());
 
             } catch (IOException e) {
@@ -87,7 +87,7 @@ public class GenerateBooks {
 
     // Copia los nuevos epubs analizados y los pega en "coleccionLibros"
     // dentro del direcctorio personal del programa
-    public void createBook(Book libro, Context context){
+    public void createBook(Book libro,String fileName, Context context){
         File dirPrivate = context.getFilesDir();
         File coleccionLibros = new File(dirPrivate,"coleccionLibros");
 
@@ -95,7 +95,7 @@ public class GenerateBooks {
             coleccionLibros.mkdir();
         }
 
-        File libroCopy =  new File(coleccionLibros, libro.getTitle()+".epub");
+        File libroCopy =  new File(coleccionLibros, fileName);
 
         if (!libroCopy.exists()){
             try {
