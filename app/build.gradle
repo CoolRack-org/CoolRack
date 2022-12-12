@@ -30,10 +30,8 @@ android {
 
 dependencies {
     //Implementacion librerias externas
-    implementation files('src\\main\\libs\\epublib-core-latest.jar')
-    //implementation files('slf4j-android-1.7.36.jar')
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'uk.uuid.slf4j:slf4j-android:1.7.30-0'
+    implementation files('libs\\epublib-core-latest.jar')
+    implementation files('libs\\slf4j-android-1.6.1-RC1.jar')
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
