@@ -30,7 +30,7 @@ android {
 
 dependencies {
     //Implementacion librerias externas
-    implementation files('epublib-core-latest.jar')
+    implementation files('src\\main\\libs\\epublib-core-latest.jar')
     //implementation files('slf4j-android-1.7.36.jar')
     implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'uk.uuid.slf4j:slf4j-android:1.7.30-0'
