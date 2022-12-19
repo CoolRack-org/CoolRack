@@ -1,15 +1,10 @@
 package com.example.coolrack.generalClass;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 
-import com.example.coolrack.R;
-
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,23 +27,7 @@ public class GenerateBooks {
         File dir = new File(path);
 
         EpubReader er = new EpubReader();
-        for (File f :dir.listFiles()/*dir.listFiles(new FileFilter() {
-            //Filtro que solo deja pasar los file que tengam formato epub
-            //los otros los desecha y no son tomados en cuenta para el programa;
-            @Override
-            public boolean accept(File file) {
-                StringBuilder sb = new StringBuilder(file.getAbsolutePath());
-                String format = String.valueOf(sb.reverse());
-                format = format.substring(0,5);
-                sb = new StringBuilder(format);
-                format = String.valueOf(sb.reverse());
-
-                if(format == ".epub")
-                    return false;
-                else
-                    return true;
-            }
-        })*/){
+        for (File f :dir.listFiles()){
 
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
@@ -89,7 +68,7 @@ public class GenerateBooks {
     // dentro del direcctorio personal del programa
     public void createBook(Book libro,String fileName, Context context){
         File dirPrivate = context.getFilesDir();
-        File coleccionLibros = new File(dirPrivate,"coleccionLibros");
+        File coleccionLibros = new File(dirPrivate,"bookCollection");
 
         if (!coleccionLibros.exists()){
             coleccionLibros.mkdir();
