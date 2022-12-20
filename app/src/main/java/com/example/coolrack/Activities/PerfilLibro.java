@@ -1,17 +1,19 @@
 package com.example.coolrack.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
-
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.Libro;
+
+import java.io.File;
 
 public class PerfilLibro extends AppCompatActivity {
     private Libro libro = null;
@@ -58,7 +60,13 @@ public class PerfilLibro extends AppCompatActivity {
         lenguaje.setText(l.getLanguage());
         identificador.setText(l.getIdentifier());
         url.setText(l.getUrl());
-        imagen.setImageResource(l.getImg());
+
+        File dirPrivate = this.getFilesDir();
+        File coverCollection = new File(dirPrivate,"coverCollection");
+        File imageFile = new File(coverCollection, l.getIdentifier()+".jpeg");
+        Uri uri = Uri.fromFile(imageFile);
+
+        imagen.setImageURI(uri);
 
     }
 
@@ -69,7 +77,6 @@ public class PerfilLibro extends AppCompatActivity {
         // Respond to the action bar's Up/Home button
         case android.R.id.home:
             startActivity(new Intent(this,MainActivity.class).putExtra("direccionAnterior",this.DIRECCION_ANTERIOR));
-            //NavUtils.navigateUpFromSameTask(this);
             return true;
     }
         return super.onOptionsItemSelected(item);

@@ -2,23 +2,20 @@ package com.example.coolrack.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
-import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
 
 import java.util.ArrayList;
-
-import nl.siegmann.epublib.domain.Book;
 
 public class Leyendo extends Fragment {
     AdaptadorItemBook adapterItem;
@@ -62,8 +59,12 @@ public class Leyendo extends Fragment {
             @Override
             public void onClick(View view) {
                 Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
-                // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
-                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class).putExtra("objetoLibro",  libro).putExtra("direccionAnterior",R.id.nav_leyendo));
+                libro.setImg(null);
+
+                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class)
+                        .putExtra("objetoLibro",  libro)
+                        .putExtra("direccionAnterior",R.id.nav_leyendo)
+                );
             }
         });
     }

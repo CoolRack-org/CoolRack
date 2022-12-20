@@ -2,7 +2,6 @@ package com.example.coolrack.generalClass;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.opengl.Matrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolrack.R;
+import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 
 import java.util.ArrayList;
-
-import nl.siegmann.epublib.domain.Book;
-import nl.siegmann.epublib.domain.Resource;
 
 public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.ViewHolder> implements View.OnClickListener{
 
@@ -47,12 +44,12 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String titulo = model.get(position).getTitle();
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
-        int imagen = model.get(position).getImg();
+        Bitmap imagen = new BitmapManager().StringToBitMap(model.get(position).getImg());
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
         holder.formato.setText(formato);
-        holder.imagen.setImageResource(imagen);
+        holder.imagen.setImageBitmap(imagen);
     }
 
     @Override
@@ -76,7 +73,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView titulo,autor,formato;
         ImageView imagen;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

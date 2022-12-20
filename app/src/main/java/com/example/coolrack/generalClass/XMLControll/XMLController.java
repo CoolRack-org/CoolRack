@@ -1,18 +1,9 @@
 package com.example.coolrack.generalClass.XMLControll;
 
 import android.content.Context;
-
-import android.graphics.Bitmap;
 import android.util.Xml;
 
 import com.example.coolrack.generalClass.Libro;
-
-import java.io.File;
-import java.io.FileInputStream;
-
-import java.io.OutputStreamWriter;
-
-import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,23 +11,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 public class XMLController {
-    // if tipo == 1 create xml of Biblioteca
-    // else tipo == 2 create xml of Leyendo
-    private int tipo;
     private String nameFile = "XMLBooks.xml";
 
     public XMLController(){}
-    public XMLController(int tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
 
     public void createXML(ArrayList<Libro> lista, Context context){
         try {
@@ -66,7 +49,7 @@ public class XMLController {
 
                 String titulo = l.getTitle();
                 String autor = l.getAuthor();
-                int imagen = l.getImg();
+                String imagen = l.getImg();
                 //String serie = l.getSerie();
                 String lenguaje = l.getLanguage();
                 String identifier = l.getIdentifier();
@@ -84,10 +67,10 @@ public class XMLController {
                 xmlSerializer.text(autor);
                 xmlSerializer.endTag("","autor");
 
-/*                xmlSerializer.startTag("","imagen");
-                xmlSerializer.text(String.valueOf(imagen)); //Falta Implementar
+                xmlSerializer.startTag("","imagen");
+                xmlSerializer.text(imagen);
                 xmlSerializer.endTag("","imagen");
-
+/*
                 xmlSerializer.startTag("","serie");
                 xmlSerializer.text(serie); //Falta Implementar
                 xmlSerializer.endTag("","serie");*/
@@ -171,6 +154,7 @@ public class XMLController {
 
     private Libro getValues(ParserDOM parser, Element eElement){
         Libro l = new Libro();
+
         l.setTitle(parser.getValue(eElement,"titulo"));
         l.setAuthor(parser.getValue(eElement,"autor"));
         //l.setSerie();
@@ -179,16 +163,18 @@ public class XMLController {
         l.setUrl(parser.getValue(eElement,"url"));
         l.setFormat(parser.getValue(eElement,"format"));
         l.setLeyendo(Boolean.valueOf(parser.getValue(eElement, "leyendo")));
-        //l.setImg(Bitmap.(parser.getValue(eElement, "imagen")));
+        l.setImg(parser.getValue(eElement, "imagen"));
 
         return l;
     }
 
 
 
-    public void addBook(Libro l, Context context){
+    public void addBook(Libro l, Context context, int tipo){
+        // tipo == 1 == grupo general
+        // tipo == 2 == grupo leyendo
         try {
-            ArrayList<Libro> lista = this.getBooks(context,1);
+            ArrayList<Libro> lista = this.getBooks(context,tipo);
             lista.add(l);
             this.createXML(lista,context);
 

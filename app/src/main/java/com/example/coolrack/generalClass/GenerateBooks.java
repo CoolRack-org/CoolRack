@@ -1,12 +1,18 @@
 package com.example.coolrack.generalClass;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
+
+import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import nl.siegmann.epublib.domain.Book;
@@ -32,6 +38,7 @@ public class GenerateBooks {
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
                 Libro l = new Libro();
+
                 if (b.getTitle().equals("Las madres"))
                     l.setLeyendo(true);
 
@@ -42,10 +49,13 @@ public class GenerateBooks {
                 l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
                 l.setUrl(f.getAbsolutePath());
                 l.setFormat(b.getMetadata().getFormat());
-                l.setImg(b.getCoverImage().getInputStream().read());
+
+                Bitmap bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
+                l.setImg(new BitmapManager().BitMapToString(bitmap));
 
                 listBook.add(l);
                 createBook(b,f.getName(),context);
+                createCovers(context, l.getIdentifier(), bitmap);
                 System.out.println(f.getAbsolutePath());
 
             } catch (IOException e) {
@@ -63,18 +73,44 @@ public class GenerateBooks {
         }
 
     }
+//------ Creacion de libros y covers el la carpeta personal del programa -------------------------------------------------------------------------------------
+    public void createCovers(Context context, String id, Bitmap bitmap){
+        //dir padre
+        File dirPrivate = context.getFilesDir();
+        File coverCollection = new File(dirPrivate,"coverCollection");
+
+        if (!coverCollection.exists()){
+            coverCollection.mkdir();
+        }
+
+        //File a crear
+        File imageFile = new File(coverCollection, id+".jpeg");
+
+        try {
+            OutputStream fileOut = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     // Copia los nuevos epubs analizados y los pega en "coleccionLibros"
     // dentro del direcctorio personal del programa
     public void createBook(Book libro,String fileName, Context context){
         File dirPrivate = context.getFilesDir();
-        File coleccionLibros = new File(dirPrivate,"bookCollection");
+        File bookCollection = new File(dirPrivate,"bookCollection");
 
-        if (!coleccionLibros.exists()){
-            coleccionLibros.mkdir();
+        if (!bookCollection.exists()){
+            bookCollection.mkdir();
         }
 
-        File libroCopy =  new File(coleccionLibros, fileName);
+        File libroCopy =  new File(bookCollection, fileName);
 
         if (!libroCopy.exists()){
             try {
@@ -85,7 +121,7 @@ public class GenerateBooks {
             e.printStackTrace();
             }
         }
-        for (File file : coleccionLibros.listFiles()){
+        for (File file : bookCollection.listFiles()){
             System.out.println(file.getAbsolutePath());
         }
     }

@@ -1,11 +1,6 @@
 package com.example.coolrack.generalClass;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
-
-import nl.siegmann.epublib.domain.Book;
-import nl.siegmann.epublib.domain.Resource;
 
 public class Libro  implements Serializable {
     private String title;
@@ -17,28 +12,8 @@ public class Libro  implements Serializable {
     private String url;
     private String format;
     private boolean leyendo;
-    private int img;
+    private String img;
 
-
-
-    /*public Libro(String title, String author, String anotation, String language, String serie,String format, String identifier,boolean leyendo, int img) {
-        this.title = title;
-        this.author = author;
-        //this.anotation = anotation;
-        this.language = language;
-        this.serie = serie;
-        this.format = format;
-        this.identifier = identifier;
-        this.leyendo = leyendo;
-        this.img = img;
-    }
-    public Libro(String title, String author, String serie,String format, Resource img) {
-        this.title = title;
-        this.author = author;
-        this.serie = serie;
-        this.format = format;
-        this.img = img;
-    }*/
     public Libro() {}
 
 
@@ -74,11 +49,11 @@ public class Libro  implements Serializable {
         this.language = language;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
