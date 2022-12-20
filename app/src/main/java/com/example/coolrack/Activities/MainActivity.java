@@ -1,38 +1,33 @@
 package com.example.coolrack.Activities;
 
-import static android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
+import android.view.Gravity;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Environment;
-import android.provider.Settings;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.example.coolrack.BuildConfig;
+import com.example.coolrack.R;
 import com.example.coolrack.fragments.Biblioteca;
 import com.example.coolrack.fragments.Informacion;
 import com.example.coolrack.fragments.Leyendo;
-import com.example.coolrack.R;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
 import com.google.android.material.navigation.NavigationView;
-
-import nl.siegmann.epublib.domain.ManifestItemProperties;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //valor que indica si el usuario acepto el permiso
@@ -134,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transactioni.replace(R.id.frame_layout,fragmentInformacion).commit();;
                 break;
         }
+        this.drawerLayout.closeDrawer(Gravity.LEFT); //!!!! Cierre automatico de menu A MEJORAR !!!!
     }
 //-------------------------------------------------------------------------------------------------------------
 
