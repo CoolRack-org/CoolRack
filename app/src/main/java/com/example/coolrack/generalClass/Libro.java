@@ -12,7 +12,7 @@ public class Libro  implements Serializable {
     private String url;
     private String format;
     private boolean leyendo;
-    private String img;
+    private byte[] img;
 
     public Libro() {}
 
@@ -49,11 +49,11 @@ public class Libro  implements Serializable {
         this.language = language;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

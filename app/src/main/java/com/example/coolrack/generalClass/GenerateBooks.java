@@ -9,10 +9,8 @@ import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 import nl.siegmann.epublib.domain.Book;
@@ -51,11 +49,10 @@ public class GenerateBooks {
                 l.setFormat(b.getMetadata().getFormat());
 
                 Bitmap bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
-                l.setImg(new BitmapManager().BitMapToString(bitmap));
+                l.setImg(new BitmapManager().bitemapCompress(bitmap));
 
                 listBook.add(l);
                 createBook(b,f.getName(),context);
-                createCovers(context, l.getIdentifier(), bitmap);
                 System.out.println(f.getAbsolutePath());
 
             } catch (IOException e) {
@@ -73,32 +70,7 @@ public class GenerateBooks {
         }
 
     }
-//------ Creacion de libros y covers el la carpeta personal del programa -------------------------------------------------------------------------------------
-    public void createCovers(Context context, String id, Bitmap bitmap){
-        //dir padre
-        File dirPrivate = context.getFilesDir();
-        File coverCollection = new File(dirPrivate,"coverCollection");
-
-        if (!coverCollection.exists()){
-            coverCollection.mkdir();
-        }
-
-        //File a crear
-        File imageFile = new File(coverCollection, id+".jpeg");
-
-        try {
-            OutputStream fileOut = new FileOutputStream(imageFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,fileOut);
-            fileOut.flush();
-            fileOut.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
+//------ copia de libros en la carpeta personal del programa -------------------------------------------------------------------------------------
 
     // Copia los nuevos epubs analizados y los pega en "coleccionLibros"
     // dentro del direcctorio personal del programa

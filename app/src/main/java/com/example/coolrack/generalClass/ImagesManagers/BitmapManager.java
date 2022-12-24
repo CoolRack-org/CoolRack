@@ -13,7 +13,7 @@ public class BitmapManager {
 //---- String/Bitmap -------------------------------------------------------------------------------------------------
     // Pasa traduce el contenido del BitMap a string para poder almacenarlo en el XML
     public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        ByteArrayOutputStream baos = new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
@@ -30,6 +30,22 @@ public class BitmapManager {
             e.getMessage();
             return null;
         }
+    }
+
+//---- Compress/Uncompress -------------------------------------------------------------------------------------------------
+    // Comprime el bitemap, que despues se seteara en el pojo Libro
+    // Gracias a esta compresion es posible enviar el pojo completo, de lo contrario no seria posible
+    // enviar todos los datos del pojo a la actividade de PerfilLibro
+    public byte[] bitemapCompress(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+
+        return bytes;
+    }
+
+    public Bitmap bitmapUncompress(byte[] bytes){
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
 }

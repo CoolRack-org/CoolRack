@@ -1,8 +1,10 @@
 package com.example.coolrack.generalClass.XMLControll;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Xml;
 
+import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.Libro;
 
 import org.w3c.dom.Document;
@@ -41,7 +43,6 @@ public class XMLController {
             xmlSerializer.setOutput(osWriter);
             xmlSerializer.startDocument("UTF-8",false);
 
-//            System.out.println(fileXML.getAbsolutePath());
 
             //Creacion de tag root
             xmlSerializer.startTag("","root");
@@ -49,7 +50,7 @@ public class XMLController {
 
                 String titulo = l.getTitle();
                 String autor = l.getAuthor();
-                String imagen = l.getImg();
+                Bitmap imagen = new BitmapManager().bitmapUncompress(l.getImg());
                 //String serie = l.getSerie();
                 String lenguaje = l.getLanguage();
                 String identifier = l.getIdentifier();
@@ -68,7 +69,7 @@ public class XMLController {
                 xmlSerializer.endTag("","autor");
 
                 xmlSerializer.startTag("","imagen");
-                xmlSerializer.text(imagen);
+                xmlSerializer.text(new BitmapManager().BitMapToString(imagen));
                 xmlSerializer.endTag("","imagen");
 /*
                 xmlSerializer.startTag("","serie");
@@ -163,7 +164,8 @@ public class XMLController {
         l.setUrl(parser.getValue(eElement,"url"));
         l.setFormat(parser.getValue(eElement,"format"));
         l.setLeyendo(Boolean.valueOf(parser.getValue(eElement, "leyendo")));
-        l.setImg(parser.getValue(eElement, "imagen"));
+        Bitmap bitmap = new BitmapManager().StringToBitMap(parser.getValue(eElement, "imagen"));
+        l.setImg(new BitmapManager().bitemapCompress(bitmap));
 
         return l;
     }

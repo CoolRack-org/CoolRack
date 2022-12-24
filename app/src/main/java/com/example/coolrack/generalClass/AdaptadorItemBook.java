@@ -44,7 +44,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String titulo = model.get(position).getTitle();
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
-        Bitmap imagen = new BitmapManager().StringToBitMap(model.get(position).getImg());
+        Bitmap imagen = new BitmapManager().bitmapUncompress(model.get(position).getImg()); //StringToBitMap(model.get(position).getImg());
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
