@@ -59,11 +59,9 @@ public class Leyendo extends Fragment {
             @Override
             public void onClick(View view) {
                 Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
-                libro.setImg(null);
 
                 startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class)
                         .putExtra("objetoLibro",  libro)
-                        .putExtra("direccionAnterior",R.id.nav_leyendo)
                 );
             }
         });

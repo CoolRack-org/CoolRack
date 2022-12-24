@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         GenerateBooks gb = new GenerateBooks();
         XMLController pepe = new XMLController();
-        pepe.createXML(gb.getLibros(this.getApplicationContext()),this.getApplicationContext());
+        pepe.createXML(gb.getLibros(this.getApplicationContext()), this.getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -80,20 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentBiblioteca = new Biblioteca();
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
-
-        try {
-            Bundle bundle = getIntent().getExtras();
-            int ID_BACK = (int) bundle.getSerializable("direccionAnterior");
-
-            if (ID_BACK != 0){
-                gestorTransiciones(ID_BACK);
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("no existe Activity anterior");
-        }
-
 
     }
 
@@ -138,16 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // buscar y guardar los nuevos libros descargados y no tener que cargarlo uno a uno
     @RequiresApi(api = Build.VERSION_CODES.R)
     private void verificarPermisos(){
-
-               /* int permisosManagerExternalStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
-       int permisosWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int permisosRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        Intent intent = new Intent(ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:" + BuildConfig.APPLICATION_ID));
-        if (*//*permisosWrite != PackageManager.PERMISSION_GRANTED && permisosRead != PackageManager.PERMISSION_GRANTED  && *//*permisosManagerExternalStorage != PackageManager.PERMISSION_GRANTED){
-
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE,ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION },REQUEST_CODE);
-            startActivityForResult(intent, REQUEST_CODE);
-        }*/
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             if(!Environment.isExternalStorageManager()){

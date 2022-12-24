@@ -1,7 +1,5 @@
 package com.example.coolrack.Activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -11,14 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolrack.R;
+import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.Libro;
-
-import java.io.File;
 
 public class PerfilLibro extends AppCompatActivity {
     private Libro libro = null;
-    private int DIRECCION_ANTERIOR = 0;
-    private  String direccion = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +31,6 @@ public class PerfilLibro extends AppCompatActivity {
 
         // Carga los datos del pojo para para poder verse
         cargarDatos(libro);
-        this.DIRECCION_ANTERIOR = (int) bundle.getSerializable("direccionAnterior");
 
     }
 
@@ -51,8 +45,6 @@ public class PerfilLibro extends AppCompatActivity {
         TextView url = (TextView) findViewById( R.id.url_perfil);
         ImageView imagen = (ImageView) findViewById( R.id.imagen_Perfil);
 
-        this.direccion = l.getUrl();
-
         // setea los datos
         titulo.setText(l.getTitle());
         autor.setText(l.getAuthor());
@@ -60,25 +52,14 @@ public class PerfilLibro extends AppCompatActivity {
         lenguaje.setText(l.getLanguage());
         identificador.setText(l.getIdentifier());
         url.setText(l.getUrl());
-
-        File dirPrivate = this.getFilesDir();
-        File coverCollection = new File(dirPrivate,"coverCollection");
-        File imageFile = new File(coverCollection, l.getIdentifier()+".jpeg");
-        Uri uri = Uri.fromFile(imageFile);
-
-        imagen.setImageURI(uri);
+        imagen.setImageBitmap(new BitmapManager().bitmapUncompress(l.getImg()));
 
     }
 
     // Redirecciona al usuario dependiendo de la opcion selecionada en la toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-        // Respond to the action bar's Up/Home button
-        case android.R.id.home:
-            startActivity(new Intent(this,MainActivity.class).putExtra("direccionAnterior",this.DIRECCION_ANTERIOR));
-            return true;
-    }
-        return super.onOptionsItemSelected(item);
+        finish();
+        return true;
     }
 }
