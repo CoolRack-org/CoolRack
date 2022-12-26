@@ -1,7 +1,9 @@
 package com.example.coolrack.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +55,15 @@ public class PerfilLibro extends AppCompatActivity {
         identificador.setText(l.getIdentifier());
         url.setText(l.getUrl());
         imagen.setImageBitmap(new BitmapManager().bitmapUncompress(l.getImg()));
+
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), com.example.coolrack.Activities.LecturaActivity.class)
+                        .putExtra("epub_location", l.getUrl())
+                );
+            }
+        });
 
     }
 

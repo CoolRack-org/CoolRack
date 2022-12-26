@@ -1,6 +1,7 @@
 package com.example.coolrack.generalClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,13 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
 
     private LayoutInflater inflater;
     private ArrayList<Libro> model;
+    private Context context;
 
     //listener
     private View.OnClickListener listener;
 
     public AdaptadorItemBook(Context context, ArrayList<Libro> model){
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -45,11 +48,13 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
         Bitmap imagen = new BitmapManager().bitmapUncompress(model.get(position).getImg()); //StringToBitMap(model.get(position).getImg());
+        String path = model.get(position).getUrl();
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
         holder.formato.setText(formato);
         holder.imagen.setImageBitmap(imagen);
+        holder.path = path;
     }
 
     @Override
@@ -73,6 +78,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView titulo,autor,formato;
         ImageView imagen;
+        String path;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +86,18 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
             autor = itemView.findViewById(R.id.autor_book);
             formato = itemView.findViewById(R.id.formato_book);
             imagen = itemView.findViewById(R.id.imageBookItem);
+
+            imagen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, com.example.coolrack.Activities.LecturaActivity.class)
+                            .putExtra("epub_location", path)
+                    );
+                }
+
+                private void startActivity(Intent epub_location) {
+                }
+            });
 
         }
     }
