@@ -1,6 +1,7 @@
 package com.example.coolrack.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -23,7 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
 import com.example.coolrack.fragments.Biblioteca;
-import com.example.coolrack.fragments.Informacion;
+
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.XMLControll.XMLController;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //despues se definiran con su respectiva clase para la navegacion
     //fragmentLeyendo == Fragmento inicial
     FragmentTransaction transactioni;
-    Fragment fragmentLeyendo, fragmentBiblioteca, fragmentInformacion;
+    Fragment fragmentLeyendo, fragmentBiblioteca;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Creacion de objetos fragment y transaction
         //esto despues se carga en el metedo onNavigationItemSelect para el cambio de dicho fragmento
         fragmentLeyendo = new Leyendo();
-        fragmentInformacion = new Informacion();
         fragmentBiblioteca = new Biblioteca();
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();;
                 break;
             case R.id.nav_info:
-                transactioni.replace(R.id.frame_layout,fragmentInformacion).commit();;
+                startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
                 break;
         }
         this.drawerLayout.closeDrawer(Gravity.LEFT); //!!!! Cierre automatico de menu A MEJORAR !!!!
