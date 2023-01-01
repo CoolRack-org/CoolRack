@@ -94,9 +94,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                             .putExtra("epub_location", path)
                     );
                 }
-
-                private void startActivity(Intent epub_location) {
-                }
             });
 
         }
