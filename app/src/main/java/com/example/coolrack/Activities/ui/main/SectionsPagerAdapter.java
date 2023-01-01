@@ -9,10 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.coolrack.R;
-import com.example.coolrack.fragments.InfoFragments.InfoLicencia;
-import com.example.coolrack.fragments.InfoFragments.InfoMasInfo;
-import com.example.coolrack.fragments.InfoFragments.InfoNovedades;
-import com.example.coolrack.fragments.InfoFragments.InfoSobreNosotros;
+import com.example.coolrack.fragments.InfoFragments.PlaceholderFragmentInformacion;
+
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -31,15 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        switch(position){
-            case 0: return  new InfoNovedades();
-            case 1: return  new InfoSobreNosotros();
-            case 2: return new InfoMasInfo();
-            case 3: return new InfoLicencia();
-        }
-
-        return new InfoNovedades();
+        return PlaceholderFragmentInformacion.newInstance(position);
     }
 
     @Nullable
