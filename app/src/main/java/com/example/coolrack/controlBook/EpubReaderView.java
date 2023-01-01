@@ -423,11 +423,17 @@ public class EpubReaderView extends WebView {
             Log.e("error", e.getMessage());
         }
     }
-    public void OpenEpubFile(String epub_location) {
+    public void OpenEpubFile(String epub_location, InputStream inputStream) {
         InputStream epubInputStream = null;
         try {
+            if (inputStream == null){
             epubInputStream = new BufferedInputStream(new FileInputStream(epub_location));
             this.book = (new EpubReader()).readEpub(epubInputStream);
+            }
+            else {
+                epubInputStream = inputStream;
+                this.book = (new EpubReader()).readEpub(epubInputStream);
+            }
             String epub_temp_extraction_location = context.getCacheDir() + "/tempfiles";
             deleteFiles(new File(epub_temp_extraction_location));
             if (!new File(epub_temp_extraction_location).exists())
@@ -693,34 +699,5 @@ public class EpubReaderView extends WebView {
                 });
         alertDialog.show();
     }
-    /*
-    Public variables
-    Book book; //epublib book object
-    List<Chapter> ChapterList : Chapter has Name and Content
-    int THEME_LIGHT = 1;
-    int THEME_DARK = 2;
-    EpubReaderListener
-        void OnPageChangeListener(int ChapterNumber,int PageNumber,float ProgressStart,float ProgressEnd);
-        void OnChapterChangeListener(int ChapterNumber);
-        void OnTextSelectionModeChangeListner(Boolean mode);
-        void OnLinkClicked(String url);
-        void OnBookStartReached();
-        void OnBookEndReached();
-    Public Functions
-    int GetTheme()
-    void SetTheme(int theme)//NightMode and DayMode
-    void ProcessTextSelection()
-    String getSelectedText()
-    void Highlight(String jsonData,String hashcolor)
-    void OpenEpubFile(String epub_location)
-    void GotoPosition(int ChapterNumber,final float Progress)
-    void ListChaptersDialog(int theme)
-    void NextPage()
-    void PreviousPage()
-    void NextChapter()
-    void PreviousChapter()
-    String GetChapterContent()
-    void ExitSelectionMode()
-    float GetProgress()
-    int GetChapterNumber()*/
+
 }

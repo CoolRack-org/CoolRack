@@ -18,6 +18,9 @@ import com.example.coolrack.controlBook.EpubReaderView;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.InputStream;
+
 public class LecturaActivity extends AppCompatActivity {
     EpubReaderView ePubReader;
     ImageView select_copy;
@@ -36,8 +39,21 @@ public class LecturaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lectura);
 
+        String epub_location = null;
+        InputStream inputStream = null;
+
+        try {
+            inputStream = getContentResolver().openInputStream(getIntent().getData());
+        } catch (Exception e) {
+            epub_location = this.getIntent().getExtras().getString("epub_location");
+        }
+
+        controllerReader(epub_location,inputStream);
+
+    }
+
+    public void controllerReader(String epub_location, InputStream inputStream){
         context = this;
-        String epub_location = this.getIntent().getExtras().getString("epub_location");
         ePubReader = (EpubReaderView) findViewById(R.id.epub_reader);
         show_toc = (ImageView) findViewById(R.id.show_toc);
         change_theme = (ImageView) findViewById(R.id.change_theme);
@@ -50,7 +66,7 @@ public class LecturaActivity extends AppCompatActivity {
         select_search = (ImageView) findViewById(R.id.select_search);
         select_exit = (ImageView) findViewById(R.id.select_exit);
 
-        ePubReader.OpenEpubFile(epub_location);
+        ePubReader.OpenEpubFile(epub_location, inputStream);
         ePubReader.GotoPosition(0,(float)0);
 
         ePubReader.setEpubReaderListener(new EpubReaderView.EpubReaderListener() {
@@ -264,4 +280,5 @@ public class LecturaActivity extends AppCompatActivity {
             }
         });
     }
+
 }
