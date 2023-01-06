@@ -1,5 +1,6 @@
 package com.example.coolrack.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.Libro;
-import com.example.coolrack.generalClass.XMLControll.XMLController;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 import java.util.ArrayList;
 
@@ -44,8 +45,8 @@ public class Leyendo extends Fragment {
 
     //Carga los datos de los libros a mostrar en la lista de libros
     public void cargarLista(){
-        XMLController xmlController = new XMLController();
-        this.listBook = xmlController.getBooks(this.getContext(),2);
+        QueryRecord queryRecord = QueryRecord.get(this.getContext());
+        this.listBook = (ArrayList<Libro>) queryRecord.getLeyendo();
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el

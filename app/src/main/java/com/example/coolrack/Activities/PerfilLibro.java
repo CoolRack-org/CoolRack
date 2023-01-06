@@ -13,9 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 public class PerfilLibro extends AppCompatActivity {
     private Libro libro = null;
+    private QueryRecord queryRecord = QueryRecord.get(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +55,19 @@ public class PerfilLibro extends AppCompatActivity {
         serie.setText(l.getSerie());
         lenguaje.setText(l.getLanguage());
         identificador.setText(l.getIdentifier());
-        url.setText(l.getUrl());
+        url.setText(l.getOriginalBookUrl());
         imagen.setImageBitmap(new BitmapManager().bitmapUncompress(l.getImg()));
 
         imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!libro.getLeyendo()){
+                    libro.setLeyendo(true);
+                    queryRecord.updateBook(libro);
+                }
+
                 startActivity(new Intent(getApplicationContext(), com.example.coolrack.Activities.LecturaActivity.class)
-                        .putExtra("epub_location", l.getUrl())
+                        .putExtra("epub_location", l.getCopyBookUrl())
                 );
             }
         });

@@ -6,11 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import nl.siegmann.epublib.domain.Book;
@@ -18,10 +24,15 @@ import nl.siegmann.epublib.epub.EpubReader;
 import nl.siegmann.epublib.epub.EpubWriter;
 
 public class GenerateBooks {
+    QueryRecord queryRecord;
+    Context context;
 
-    public GenerateBooks(){}
+    public GenerateBooks(Context context){
+        this.queryRecord = QueryRecord.get(context);
+        this.context = context;
+    }
 
-    public ArrayList<Libro> getLibros(Context context) {
+    public void searchLibors() {
         ArrayList<Libro> listBook = null;
 
         try {
@@ -35,29 +46,12 @@ public class GenerateBooks {
 
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
-                Libro l = new Libro();
-
-                if (b.getTitle().equals("Las madres"))
-                    l.setLeyendo(true);
-
-                l.setTitle(b.getTitle());
-                l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname()+" "+b.getMetadata().getAuthors().get(0).getLastname());
-                //l.setSerie();
-                l.setLanguage(b.getMetadata().getLanguage());
-                l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
-                l.setUrl(f.getAbsolutePath());
-                l.setFormat(b.getMetadata().getFormat());
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
-                l.setImg(new BitmapManager().bitemapCompress(bitmap));
+                Libro l = setData(b, f.getAbsolutePath(),false);
 
                 listBook.add(l);
-                createBook(b,f.getName(),context);
                 System.out.println(f.getAbsolutePath());
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (Exception e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
 
@@ -66,23 +60,72 @@ public class GenerateBooks {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-        return listBook;
+            for(Libro l: listBook){
+                queryRecord.setNewBook(l);
+            }
         }
 
+    }
+
+    // retorna la direccio de la copia del libro a leer
+    // añade un nuevo libro la DB asi como generar una copia privada para el programa
+    public String addLibroInDB (File file){
+        Libro l = null;
+        Book book = null;
+
+        try {
+            InputStream epubInputStream = new BufferedInputStream(new FileInputStream(file));
+            book = (new EpubReader()).readEpub(epubInputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        l = setData(book, file.getAbsolutePath(), true);
+
+        queryRecord.setNewBook(l);
+
+        return l.getCopyBookUrl();
+    }
+
+
+    private Libro setData (Book b,String absolutePath, boolean leyendo){
+        Libro l = new Libro();
+
+        l.setTitle(b.getTitle());
+        l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname()+" "+b.getMetadata().getAuthors().get(0).getLastname());
+        //l.setSerie();
+        l.setLanguage(b.getMetadata().getLanguage());
+        l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
+        l.setOriginalBookUrl(absolutePath);
+        l.setFormat(b.getMetadata().getFormat());
+        l.setLeyendo(leyendo);
+
+        l.setCopyBookUrl(createBook(b));
+
+        try {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
+            l.setImg(new BitmapManager().bitemapCompress(bitmap));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return l;
     }
 //------ copia de libros en la carpeta personal del programa -------------------------------------------------------------------------------------
 
     // Copia los nuevos epubs analizados y los pega en "coleccionLibros"
     // dentro del direcctorio personal del programa
-    public void createBook(Book libro,String fileName, Context context){
-        File dirPrivate = context.getFilesDir();
-        File bookCollection = new File(dirPrivate,"bookCollection");
+    // devuelve la ruta de la copia
+    private String createBook(Book libro){
+        File bookCollection = new File(context.getFilesDir(),"bookCollection");
 
         if (!bookCollection.exists()){
             bookCollection.mkdir();
         }
 
-        File libroCopy =  new File(bookCollection, fileName);
+        File libroCopy =  new File(bookCollection, libro.getMetadata().getIdentifiers().get(0).getValue()+".epub");
 
         if (!libroCopy.exists()){
             try {
@@ -93,8 +136,31 @@ public class GenerateBooks {
             e.printStackTrace();
             }
         }
-        for (File file : bookCollection.listFiles()){
-            System.out.println(file.getAbsolutePath());
-        }
+
+        return libroCopy.getAbsolutePath();
     }
+
+    public File inputStreamToFile(InputStream inputStream, String fileName) throws IOException {
+        int CHUNK_SIZE = 1024 * 4;
+
+
+        String path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+        File file  = new File(path, fileName);
+
+        OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+        byte[] chunk = new byte[CHUNK_SIZE];
+        int bytesLeidos = 0;
+        //mientras que podamos leer bytes del stream de entrada
+        //en bloques de tamaño CHUNK_SIZE
+        while ( (bytesLeidos = inputStream.read(chunk)) > 0) {
+            //escribir los bytes leidos en el arreglo
+            //desde la posición 0 hasta la posición marcada por
+            //el valor de la variable bytesLeidos
+            os.write(chunk, 0, bytesLeidos);
+        }
+        os.close();
+
+        return file;
+    }
+
 }

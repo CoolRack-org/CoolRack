@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     private ArrayList<Libro> model;
     private Context context;
 
+    private QueryRecord queryRecord;
+
     //listener
     private View.OnClickListener listener;
 
@@ -30,6 +33,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.model = model;
+        this.queryRecord = QueryRecord.get(context);
     }
 
     @NonNull
@@ -48,13 +52,15 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
         Bitmap imagen = new BitmapManager().bitmapUncompress(model.get(position).getImg()); //StringToBitMap(model.get(position).getImg());
-        String path = model.get(position).getUrl();
+        String path = model.get(position).getOriginalBookUrl();
+        Libro libro = model.get(position);
 
         holder.titulo.setText(titulo);
         holder.autor.setText(autor);
         holder.formato.setText(formato);
         holder.imagen.setImageBitmap(imagen);
         holder.path = path;
+        holder.libro = libro;
     }
 
     @Override
@@ -79,6 +85,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         TextView titulo,autor,formato;
         ImageView imagen;
         String path;
+        Libro libro;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,8 +97,13 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
             imagen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (!libro.getLeyendo()){
+                        libro.setLeyendo(true);
+                        queryRecord.updateBook(libro);
+                    }
+
                     context.startActivity(new Intent(context, com.example.coolrack.Activities.LecturaActivity.class)
-                            .putExtra("epub_location", path)
+                            .putExtra("epub_location", libro.getCopyBookUrl())
                     );
                 }
             });

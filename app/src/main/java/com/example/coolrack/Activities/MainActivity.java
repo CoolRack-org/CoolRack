@@ -27,8 +27,11 @@ import com.example.coolrack.fragments.Biblioteca;
 
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.generalClass.GenerateBooks;
-import com.example.coolrack.generalClass.XMLControll.XMLController;
+import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //valor que indica si el usuario acepto el permiso
@@ -50,10 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         //verifica si la aplicacion tiene permisos, si no los tiene los pide y asigna
         verificarPermisos();
-
-        GenerateBooks gb = new GenerateBooks();
-        XMLController pepe = new XMLController();
-        pepe.createXML(gb.getLibros(this.getApplicationContext()), this.getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -145,8 +144,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
    }
-
-
-
 //-------------------------------------------------------------------------------------------------------------
 }

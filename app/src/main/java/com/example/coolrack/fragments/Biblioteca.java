@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.Libro;
-import com.example.coolrack.generalClass.XMLControll.XMLController;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+
 
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public class Biblioteca extends Fragment {
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
     ArrayList<Libro> listBook;
+
+    private QueryRecord queryRecord;
 
     public Biblioteca() {}
 
@@ -32,6 +35,7 @@ public class Biblioteca extends Fragment {
         View view = inflater.inflate(R.layout.fragment_biblioteca, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         listBook = new ArrayList<>();
+        queryRecord = QueryRecord.get(this.getContext());
 
         //cargar lista
         cargarLista();
@@ -44,8 +48,7 @@ public class Biblioteca extends Fragment {
     }
 
     public void cargarLista(){
-        XMLController xmlController = new XMLController();
-        this.listBook = xmlController.getBooks(this.getContext(),1);
+        this.listBook = (ArrayList<Libro>) queryRecord.getAll();//xmlController.getBooks(this.getContext(),2);
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el

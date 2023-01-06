@@ -1,10 +1,16 @@
 package com.example.coolrack.Activities;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,11 +21,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolrack.R;
 import com.example.coolrack.controlBook.EpubReaderView;
+import com.example.coolrack.generalClass.GenerateBooks;
+import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.epub.EpubReader;
 
 public class LecturaActivity extends AppCompatActivity {
     EpubReaderView ePubReader;
@@ -34,26 +50,90 @@ public class LecturaActivity extends AppCompatActivity {
     ImageView change_theme;
     LinearLayout bottom_contextual_bar;
     Context context;
+
+    QueryRecord queryRecord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lectura);
 
+        context = this.getApplicationContext();
+
         String epub_location = null;
-        InputStream inputStream = null;
 
         try {
-            inputStream = getContentResolver().openInputStream(getIntent().getData());
-        } catch (Exception e) {
             epub_location = this.getIntent().getExtras().getString("epub_location");
+        } catch (Exception e) {
+            epub_location = getRealPath();
         }
 
-        controllerReader(epub_location,inputStream);
+        controllerReader(epub_location);
 
     }
 
-    public void controllerReader(String epub_location, InputStream inputStream){
-        context = this;
+    // Genera la ruta necesaria para acceder al EPUB a leer
+    // y modifica y/o lo añade a la base de datos en el grupo de LEYENDO
+    private String getRealPath(){
+        QueryRecord queryRecord =  QueryRecord.get(this);
+        File file = null;
+        Libro libro = null;
+        String displayName = null;
+
+        String downloadPath = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+
+        Cursor cursor = this.getContentResolver()
+                .query(getIntent().getData(), null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            file = new File(downloadPath, displayName);
+            Log.i(TAG,displayName);
+            Log.i(TAG,file.getAbsolutePath());
+            cursor.close();
+        }
+
+
+        // Si el fichero existe en la base de datos significa que tambien existe en el directorio descargas y retorna un inputStream legible por la libreria
+        // en el caso contrario copiara el contenido del inputStrean en el directorio descargas y realizara el proceso de creacion de un nuevo libro
+        if (file.exists()){
+            libro = queryRecord.getLibroForPath(file.getAbsolutePath());
+
+            // si el libro esta en la base de datos modifica los valores necesarios
+            // y devuelve la ruta a utilizar.
+            // Si por lo contrario no se encuentra entonces se inicia el proceso de añadir el libro.
+            if (libro != null){
+                libro.setLeyendo(true);
+                queryRecord.updateBook(libro);
+                Log.i(TAG, "EXISTE EN LA BASE DE DATOS Y EN EL DIRECTORIO DESCARGAS");
+                return libro.getCopyBookUrl();
+            }
+            else {
+                Log.i(TAG, "NO EXISTE EN LA BASE DE DATOS PERO SI EN EL DIRECTORIO DESCARGAS");
+                return new GenerateBooks(context).addLibroInDB(file);
+            }
+        }
+        else{
+            InputStream inputStream = null;
+            try {
+                inputStream = getContentResolver().openInputStream(getIntent().getData());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            GenerateBooks generateBooks = new GenerateBooks(context);
+
+            try {
+                file = generateBooks.inputStreamToFile(inputStream, displayName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Log.i(TAG,"NO EXISTE NI EN LA BASE DE DATOS NI EN EL DIRECTORIO DESCARGAS");
+
+            return generateBooks.addLibroInDB(file);
+        }
+    }
+
+    public void controllerReader(String epub_location){
         ePubReader = (EpubReaderView) findViewById(R.id.epub_reader);
         show_toc = (ImageView) findViewById(R.id.show_toc);
         change_theme = (ImageView) findViewById(R.id.change_theme);
@@ -66,7 +146,7 @@ public class LecturaActivity extends AppCompatActivity {
         select_search = (ImageView) findViewById(R.id.select_search);
         select_exit = (ImageView) findViewById(R.id.select_exit);
 
-        ePubReader.OpenEpubFile(epub_location, inputStream);
+        ePubReader.OpenEpubFile(epub_location);
         ePubReader.GotoPosition(0,(float)0);
 
         ePubReader.setEpubReaderListener(new EpubReaderView.EpubReaderListener() {
