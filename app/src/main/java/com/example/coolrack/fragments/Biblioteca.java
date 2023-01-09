@@ -70,4 +70,9 @@ public class Biblioteca extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
