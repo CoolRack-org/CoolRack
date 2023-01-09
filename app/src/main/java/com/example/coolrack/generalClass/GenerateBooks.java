@@ -3,8 +3,12 @@ package com.example.coolrack.generalClass;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Environment;
+import android.provider.MediaStore;
 
+import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
@@ -104,12 +108,14 @@ public class GenerateBooks {
 
         l.setCopyBookUrl(createBook(b));
 
+        Bitmap bitmap = null;
         try {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
-            l.setImg(new BitmapManager().bitemapCompress(bitmap));
+            bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
         } catch (IOException e) {
-            e.printStackTrace();
+            bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher_background);
+            //e.printStackTrace();
         }
+        l.setImg(new BitmapManager().bitemapCompress(bitmap));
 
         return l;
     }
