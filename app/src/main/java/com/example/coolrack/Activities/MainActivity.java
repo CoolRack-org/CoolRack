@@ -110,11 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_biblioteca:
                 transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();;
                 break;
+            case R.id.nav_opciones:
+                startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
+                break;
             case R.id.nav_info:
                 startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
                 break;
         }
-        this.drawerLayout.closeDrawer(Gravity.LEFT); //!!!! Cierre automatico de menu A MEJORAR !!!!
+        this.drawerLayout.closeDrawer(Gravity.LEFT); //!!!! Cierre automatico de menu !!!!
     }
 //-------------------------------------------------------------------------------------------------------------
 

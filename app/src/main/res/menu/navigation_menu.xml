@@ -4,16 +4,22 @@
     tools:ignore="HardcodedText"
     >
 
-    <item
-        android:id="@+id/nav_leyendo"
-        android:title="Leyendo" />
+    <group android:id="@+id/general">
+        <item
+            android:id="@+id/nav_leyendo"
+            android:title="Leyendo" />
+        <item
+            android:id="@+id/nav_biblioteca"
+            android:title="Biblioteca" />
+    </group>
 
-    <item
-        android:id="@+id/nav_biblioteca"
-        android:title="Biblioteca" />
-
-    <item
-        android:id="@+id/nav_info"
-        android:title="Info" />
+    <group android:id="@+id/options">
+        <item
+            android:id="@+id/nav_opciones"
+            android:title="Opciones" />
+        <item
+            android:id="@+id/nav_info"
+            android:title="Informacion" />
+    </group>
 
 </menu>
