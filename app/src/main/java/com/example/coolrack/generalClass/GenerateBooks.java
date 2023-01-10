@@ -37,36 +37,32 @@ public class GenerateBooks {
     }
 
     public void searchLibors() {
-        ArrayList<Libro> listBook = null;
 
         try {
-        listBook = new ArrayList<>();
         //saca la ruta de Descargas y lo usa en el objeto dir
         String path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
         File dir = new File(path);
 
         EpubReader er = new EpubReader();
         for (File f :dir.listFiles()){
-
+            Libro l = null;
             try {
                 Book b = er.readEpub(new FileInputStream(f.getAbsolutePath()));
-                Libro l = setData(b, f.getAbsolutePath(),false);
+                l = setData(b, f.getAbsolutePath(),false);
 
-                listBook.add(l);
+                if(l != null)
+                    queryRecord.setNewBook(l);
                 System.out.println(f.getAbsolutePath());
 
             } catch (Exception e){
                 e.printStackTrace();
+            }finally {
+                l = null;
             }
-
         }
 
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            for(Libro l: listBook){
-                queryRecord.setNewBook(l);
-            }
         }
 
     }
@@ -97,26 +93,29 @@ public class GenerateBooks {
     private Libro setData (Book b,String absolutePath, boolean leyendo){
         Libro l = new Libro();
 
-        l.setTitle(b.getTitle());
-        l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname()+" "+b.getMetadata().getAuthors().get(0).getLastname());
-        //l.setSerie();
-        l.setLanguage(b.getMetadata().getLanguage());
-        l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
-        l.setOriginalBookUrl(absolutePath);
-        l.setFormat(b.getMetadata().getFormat());
-        l.setLeyendo(leyendo);
-
-        l.setCopyBookUrl(createBook(b));
-
-        Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(),0,b.getCoverImage().getData().length);
-        } catch (IOException e) {
-            bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher_background);
-            //e.printStackTrace();
-        }
-        l.setImg(new BitmapManager().bitemapCompress(bitmap));
+            l.setTitle(b.getTitle());
+            l.setAuthor(b.getMetadata().getAuthors().get(0).getFirstname() + " " + b.getMetadata().getAuthors().get(0).getLastname());
+            //l.setSerie();
+            l.setLanguage(b.getMetadata().getLanguage());
+            l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
+            l.setOriginalBookUrl(absolutePath);
+            l.setFormat(b.getMetadata().getFormat());
+            l.setLeyendo(leyendo);
 
+            l.setCopyBookUrl(createBook(b));
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = BitmapFactory.decodeByteArray(b.getCoverImage().getData(), 0, b.getCoverImage().getData().length);
+            } catch (IOException e) {
+                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_background);
+                //e.printStackTrace();
+            }
+            l.setImg(new BitmapManager().bitemapCompress(bitmap));
+        }catch (Exception e){
+            l = null;
+        }
         return l;
     }
 //------ copia de libros en la carpeta personal del programa -------------------------------------------------------------------------------------
