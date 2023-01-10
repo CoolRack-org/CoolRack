@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
                 break;
         }
-        this.drawerLayout.closeDrawer(Gravity.LEFT); //!!!! Cierre automatico de menu !!!!
+        this.drawerLayout.closeDrawer(Gravity.LEFT);
     }
 //-------------------------------------------------------------------------------------------------------------
 

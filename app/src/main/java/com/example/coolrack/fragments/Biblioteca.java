@@ -48,7 +48,7 @@ public class Biblioteca extends Fragment {
     }
 
     public void cargarLista(){
-        this.listBook = (ArrayList<Libro>) queryRecord.getAll();//xmlController.getBooks(this.getContext(),2);
+        this.listBook = (ArrayList<Libro>) queryRecord.getAll();
     }
 
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
