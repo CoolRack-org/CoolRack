@@ -14,6 +14,7 @@ import com.example.coolrack.R;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+import com.example.coolrack.generalClass.TransitionManager;
 
 
 import java.util.ArrayList;
@@ -64,9 +65,7 @@ public class Biblioteca extends Fragment {
                 Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
 
                 // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
-                startActivity(new Intent(getActivity(), com.example.coolrack.Activities.PerfilLibro.class)
-                        .putExtra("objetoLibro",  libro)
-                );
+                new TransitionManager(getContext()).goToPerfilLibro(libro.getIdentifier());
             }
         });
     }

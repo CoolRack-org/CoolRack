@@ -102,9 +102,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         queryRecord.updateBook(libro);
                     }
 
-                    context.startActivity(new Intent(context, com.example.coolrack.Activities.LecturaActivity.class)
-                            .putExtra("epub_location", libro.getCopyBookUrl())
-                    );
+                    new TransitionManager(context).goToLecturaActivity(libro.getCopyBookUrl(), true);
                 }
             });
 

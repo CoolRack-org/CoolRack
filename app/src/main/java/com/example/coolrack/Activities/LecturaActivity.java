@@ -12,11 +12,13 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolrack.R;
@@ -51,15 +53,26 @@ public class LecturaActivity extends AppCompatActivity {
     LinearLayout bottom_contextual_bar;
     Context context;
 
+    //determina si se entro en la activity desde otra parte del mismo programa o si por lo contrario se abrio por un sitio externo
+    boolean openInProgram;
+
     QueryRecord queryRecord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lectura);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         context = this.getApplicationContext();
 
         String epub_location = null;
+
+        try {
+            openInProgram = this.getIntent().getExtras().getBoolean("openInProgram");
+        } catch (Exception e){
+            openInProgram = false;
+        }
 
         try {
             epub_location = this.getIntent().getExtras().getString("epub_location");
@@ -361,4 +374,14 @@ public class LecturaActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (openInProgram){
+            finish();
+        } else{
+            startActivity(new Intent(this, com.example.coolrack.Activities.MainActivity.class));
+        }
+
+        return true;
+    }
 }

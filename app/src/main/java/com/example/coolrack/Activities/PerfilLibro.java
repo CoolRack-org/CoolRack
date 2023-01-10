@@ -2,10 +2,13 @@ package com.example.coolrack.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +32,9 @@ public class PerfilLibro extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // carga el pojo enviado por  la Actividad/fragmento que cargo esta Activity anteriormente
-        Bundle bundle = getIntent().getExtras();
-        this.libro = (Libro) bundle.getSerializable("objetoLibro");
+        String idBook = getIntent().getExtras().getString("idBook");
+        this.libro = queryRecord.getLibro(idBook);
+
         this.setTitle(libro.getTitle());
 
         // Carga los datos del pojo para para poder verse
@@ -67,17 +71,38 @@ public class PerfilLibro extends AppCompatActivity {
                 }
 
                 startActivity(new Intent(getApplicationContext(), com.example.coolrack.Activities.LecturaActivity.class)
-                        .putExtra("epub_location", l.getCopyBookUrl())
+                        .putExtra("epub_location", libro.getCopyBookUrl())
+                        .putExtra("openInProgram", true)
                 );
             }
         });
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.perfil_libro_menu, menu);
+        return true;
+    }
+
+
+
     // Redirecciona al usuario dependiendo de la opcion selecionada en la toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        finish();
+        switch (item.getItemId()){
+            case R.id.LeerPerfilBook:
+                startActivity(new Intent(getApplicationContext(), com.example.coolrack.Activities.LecturaActivity.class)
+                        .putExtra("epub_location", libro.getCopyBookUrl())
+                        .putExtra("openInProgram", true)
+                );
+                break;
+            default:
+                finish();
+        }
+
         return true;
     }
 }
