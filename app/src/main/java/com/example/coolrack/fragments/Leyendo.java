@@ -83,6 +83,10 @@ public class Leyendo extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //cargar lista
+        cargarLista();
+        //mostrar data
+        mostrarData();
     }
 
     ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
