@@ -1,20 +1,28 @@
 package com.example.coolrack.fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.AdaptadorItemBook;
+import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.example.coolrack.generalClass.TransitionManager;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import java.util.ArrayList;
@@ -24,6 +32,7 @@ public class Biblioteca extends Fragment {
     AdaptadorItemBook adapterItem;
     RecyclerView recyclerView;
     ArrayList<Libro> listBook;
+    LinearLayout linearLayout;
 
     private QueryRecord queryRecord;
 
@@ -36,6 +45,7 @@ public class Biblioteca extends Fragment {
         View view = inflater.inflate(R.layout.fragment_biblioteca, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         listBook = new ArrayList<>();
+        linearLayout = view.findViewById(R.id.bibliotecaLayout);
         queryRecord = QueryRecord.get(this.getContext());
 
         //cargar lista
@@ -44,6 +54,9 @@ public class Biblioteca extends Fragment {
         mostrarData();
 
         this.getActivity().setTitle("Biblioteca");
+
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
 
         return view;
     }
@@ -78,4 +91,24 @@ public class Biblioteca extends Fragment {
         //mostrar data
         mostrarData();
     }
+
+    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Libro libro = listBook.get(viewHolder.getAdapterPosition());
+            Log.i(TAG,libro.getTitle());
+
+            Snackbar.make(linearLayout,libro.getTitle()+" eliminado de la base de datos",Snackbar.LENGTH_LONG).show();
+            new GenerateBooks(getContext()).removeBook(libro.getCopyBookUrl());
+            queryRecord.deleteBook(libro);
+
+            listBook.remove(viewHolder.getAdapterPosition());
+            adapterItem.notifyDataSetChanged();
+        }
+    };
 }

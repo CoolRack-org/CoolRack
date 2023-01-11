@@ -145,6 +145,11 @@ public class GenerateBooks {
         return libroCopy.getAbsolutePath();
     }
 
+    public void removeBook(String path){
+        File file = new File(path);
+        file.delete();
+    }
+
     public File inputStreamToFile(InputStream inputStream, String fileName) throws IOException {
         int CHUNK_SIZE = 1024 * 4;
 
