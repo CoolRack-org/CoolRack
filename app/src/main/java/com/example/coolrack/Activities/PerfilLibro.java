@@ -94,6 +94,9 @@ public class PerfilLibro extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.LeerPerfilBook:
+                libro.setLeyendo(true);
+                queryRecord.updateBook(libro);
+
                 startActivity(new Intent(getApplicationContext(), com.example.coolrack.Activities.LecturaActivity.class)
                         .putExtra("epub_location", libro.getCopyBookUrl())
                         .putExtra("openInProgram", true)
