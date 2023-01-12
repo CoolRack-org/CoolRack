@@ -3,8 +3,20 @@ package com.example.coolrack.fragments.InfoFragments;
 public class DataInformacion {
 
     public static final String DATA_NOVEDADES = "" +
-            "*v0.1-alpha\n" +
-            "Primera version del programa, en esta simple version podras encontrar:\n" +
+            "*v1.0-alpha\n" +
+            " -Implementación de abertura de archivos \".epub\" de manera externa al programa.\n" +
+            " -Implementación de un menú de opciones de configuración con la capacidad de buscar múltiples archivos y añadirlos a la biblioteca.\n" +
+            " -Implementación de menú en \"Informacion\" donde podrás ver diferente información adicional del programa como la licencia o las actualizaciones.\n"+
+            " -Implementación de mecánica en \"Leyendo\", ahora al leer un libro aparecerá en la ventana \"Leyendo\", también podrás quitarlo de dicha sección.\n"+
+            " -Implementación de mecánica en \"Biblioteca\", ahora puedes eliminar tus libros de la base de datos.\n"+
+            " -Implementación de mecánica, ahora los libros se actualizan automáticamente al volver a una sección.\n"+
+            " -Implementación de Botón para ir atrás en la lectura de un libro y botón de leer en el perfil del libro.\n"+
+            " -Sustitución de algoritmo de gestión de datos, cambio de manejo de datos de archivos XML a base de datos local en SQLite.\n"+
+
+            "\n\n"+
+
+            "*v0.1-pre-alpha\n" +
+            " Primera version del programa, en esta simple version podras encontrar:\n" +
             "   -Seccion de \"biblioteca\".\n" +
             "   -Seccion de \"Leyendo\".\n" +
             "   -Seccion de \"Informacion\".\n" +
