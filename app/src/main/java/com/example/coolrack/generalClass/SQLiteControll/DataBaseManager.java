@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.example.coolrack.generalClass.Libro;
 
-@Database(entities = {Libro.class}, version = 1)
+@Database(entities = {Libro.class}, version = 2)
 public abstract class DataBaseManager extends RoomDatabase {
 
     public abstract LibroDao getLibroDao();

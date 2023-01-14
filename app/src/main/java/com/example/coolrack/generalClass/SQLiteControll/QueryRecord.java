@@ -53,6 +53,22 @@ public class QueryRecord {
         return libroDao.getLeyendo();
     }
 
+    public List<Libro> getPapelera() {
+        return libroDao.getPapelera();
+    }
+
+    public List<Libro> getFavorito() {
+        return libroDao.getFavorito();
+    }
+
+    public List<Libro> getLeido() {
+        return libroDao.getLeido();
+    }
+
+    public List<Libro> getParaLeer() {
+        return libroDao.getParaLeer();
+    }
+
     public Libro getLibro(String identifier) {
         return libroDao.getLibro(identifier);
     }

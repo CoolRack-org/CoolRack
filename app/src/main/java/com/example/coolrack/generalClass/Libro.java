@@ -48,6 +48,18 @@ public class Libro  implements Serializable {
     @ColumnInfo(name = "leyendo")
     private boolean leyendo;
 
+    @ColumnInfo(name = "papelera")
+    private boolean papelera;
+
+    @ColumnInfo(name = "favorito")
+    private boolean favorito;
+
+    @ColumnInfo(name = "leido")
+    private boolean leido;
+
+    @ColumnInfo(name = "paraLeer")
+    private boolean paraLeer;
+
     @ColumnInfo(name = "img")
     private byte[] img;
 
@@ -55,7 +67,7 @@ public class Libro  implements Serializable {
     public Libro() {}
 
     public Libro(@NonNull String identifier, String title, String author, String serie, String language, String originalBookUrl,
-                 String copyBookUrl, String format, boolean leyendo, byte[] img) {
+                 String copyBookUrl, String format, boolean leyendo, boolean papelera, boolean favorito, boolean leido, boolean paraLeer, byte[] img) {
         this.identifier = identifier;
         this.title = title;
         this.author = author;
@@ -65,6 +77,10 @@ public class Libro  implements Serializable {
         this.copyBookUrl = copyBookUrl;
         this.format = format;
         this.leyendo = leyendo;
+        this.papelera = papelera;
+        this.favorito = favorito;
+        this.leido = leido;
+        this.paraLeer = paraLeer;
         this.img = img;
     }
 
@@ -154,5 +170,37 @@ public class Libro  implements Serializable {
 
     public void setLeyendo(boolean leyendo) {
         this.leyendo = leyendo;
+    }
+
+    public boolean getPapelera() {
+        return papelera;
+    }
+
+    public void setPapelera(boolean papelera) {
+        this.papelera = papelera;
+    }
+
+    public boolean getFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
+    public boolean getLeido() {
+        return leido;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
+    }
+
+    public boolean getParaLeer() {
+        return paraLeer;
+    }
+
+    public void setParaLeer(boolean paraLeer) {
+        this.paraLeer = paraLeer;
     }
 }

@@ -27,6 +27,18 @@ public interface LibroDao {
     @Query("SELECT * FROM book WHERE leyendo LIKE 1")
     List<Libro> getLeyendo();
 
+    @Query("SELECT * FROM book WHERE papelera LIKE 1")
+    List<Libro> getPapelera();
+
+    @Query("SELECT * FROM book WHERE favorito LIKE 1")
+    List<Libro> getFavorito();
+
+    @Query("SELECT * FROM book WHERE leido LIKE 1")
+    List<Libro> getLeido();
+
+    @Query("SELECT * FROM book WHERE paraLeer LIKE 1")
+    List<Libro> getParaLeer();
+
     @Query("SELECT * FROM book WHERE identifier LIKE :identifierBook")
     Libro getLibro(String identifierBook);
 
