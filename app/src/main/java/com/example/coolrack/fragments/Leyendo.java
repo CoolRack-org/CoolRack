@@ -26,66 +26,20 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class Leyendo extends Fragment {
-    AdaptadorItemBook adapterItem;
-    RecyclerView recyclerView;
-    ArrayList<Libro> listBook;
-    LinearLayout linearLayout;
-    QueryRecord queryRecord;
+public class Leyendo extends FatherMainFragment{
 
     public Leyendo() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_leyendo, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        linearLayout = view.findViewById(R.id.leyendolayout);
-        listBook = new ArrayList<>();
-        queryRecord = QueryRecord.get(this.getContext());
-
-        //cargar lista
-        cargarLista();
-        //mostrar data
-        mostrarData();
-
-        this.getActivity().setTitle("Leyendo");
-
+    protected void personalizeFragment() {
+        getActivity().setTitle("Leyendo");
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
-
-        return view;
-    }
-
-    //Carga los datos de los libros a mostrar en la lista de libros
-    public void cargarLista(){
-        this.listBook = (ArrayList<Libro>) queryRecord.getLeyendo();
-    }
-
-    //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
-    public void mostrarData(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterItem = new AdaptadorItemBook(getContext(),listBook);
-        recyclerView.setAdapter(adapterItem);
-
-        //Te redirecciona al perfil del libro (Activity)
-        adapterItem.setOnclickLister(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
-
-                new TransitionManager(getContext()).goToPerfilLibro(libro.getIdentifier());
-            }
-        });
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //cargar lista
-        cargarLista();
-        //mostrar data
-        mostrarData();
+    protected void cargarLista(){
+        this.listBook = (ArrayList<Libro>) this.queryRecord.getLeyendo();
     }
 
     ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -107,7 +61,6 @@ public class Leyendo extends Fragment {
 
             listBook.remove(viewHolder.getAdapterPosition());
             adapterItem.notifyDataSetChanged();
-
 
         }
     };

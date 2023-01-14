@@ -27,69 +27,20 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class Biblioteca extends Fragment {
-
-    AdaptadorItemBook adapterItem;
-    RecyclerView recyclerView;
-    ArrayList<Libro> listBook;
-    LinearLayout linearLayout;
-
-    private QueryRecord queryRecord;
+public class Biblioteca extends FatherMainFragment {
 
     public Biblioteca() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_biblioteca, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        listBook = new ArrayList<>();
-        linearLayout = view.findViewById(R.id.bibliotecaLayout);
-        queryRecord = QueryRecord.get(this.getContext());
-
-        //cargar lista
-        cargarLista();
-        //mostrar data
-        mostrarData();
-
-        this.getActivity().setTitle("Biblioteca");
-
+    protected void personalizeFragment() {
+        getActivity().setTitle("Biblioteca");
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
-
-        return view;
-    }
-
-    public void cargarLista(){
-        this.listBook = (ArrayList<Libro>) queryRecord.getAll();
-    }
-
-    //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
-    public void mostrarData(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterItem = new AdaptadorItemBook(getContext(),this.listBook);
-        recyclerView.setAdapter(adapterItem);
-
-        //Te redirecciona al perfil del usuario (Activity)
-        adapterItem.setOnclickLister(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
-
-                // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
-                new TransitionManager(getContext()).goToPerfilLibro(libro.getIdentifier());
-            }
-        });
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //cargar lista
-        cargarLista();
-        //mostrar data
-        mostrarData();
+    public void cargarLista(){
+        this.listBook = (ArrayList<Libro>) queryRecord.getAll();
     }
 
     ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
