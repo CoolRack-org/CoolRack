@@ -38,11 +38,6 @@ public class Biblioteca extends FatherMainFragment {
         helper.attachToRecyclerView(recyclerView);
     }
 
-    @Override
-    public void cargarLista(){
-        this.listBook = (ArrayList<Libro>) queryRecord.getAll();
-    }
-
     ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
