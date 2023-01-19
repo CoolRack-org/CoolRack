@@ -26,6 +26,7 @@ import com.example.coolrack.R;
 import com.example.coolrack.fragments.Biblioteca;
 
 import com.example.coolrack.fragments.Leyendo;
+import com.example.coolrack.fragments.Papelera;
 import com.example.coolrack.generalClass.GenerateBooks;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //despues se definiran con su respectiva clase para la navegacion
     //fragmentLeyendo == Fragmento inicial
     FragmentTransaction transactioni;
-    Fragment fragmentLeyendo, fragmentBiblioteca;
+    Fragment fragmentLeyendo, fragmentBiblioteca, fragmentPapelera;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //esto despues se carga en el metedo onNavigationItemSelect para el cambio de dicho fragmento
         fragmentLeyendo = new Leyendo();
         fragmentBiblioteca = new Biblioteca();
+        fragmentPapelera = new Papelera();
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
 
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_biblioteca:
                 transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();;
+                break;
+            case R.id.nav_papelera:
+                transactioni.replace(R.id.frame_layout,fragmentPapelera).commit();
                 break;
             case R.id.nav_opciones:
                 startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));

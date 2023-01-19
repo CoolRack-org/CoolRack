@@ -21,22 +21,22 @@ public interface LibroDao {
     @Update
     void updateBook(Libro libro);
 
-    @Query("SELECT * FROM book")
+    @Query("SELECT * FROM book WHERE papelera LIKE 0")
     List<Libro> getAll();
 
-    @Query("SELECT * FROM book WHERE leyendo LIKE 1")
+    @Query("SELECT * FROM book WHERE leyendo LIKE 1 AND papelera LIKE 0")
     List<Libro> getLeyendo();
 
     @Query("SELECT * FROM book WHERE papelera LIKE 1")
     List<Libro> getPapelera();
 
-    @Query("SELECT * FROM book WHERE favorito LIKE 1")
+    @Query("SELECT * FROM book WHERE favorito LIKE 1 AND papelera LIKE 0")
     List<Libro> getFavorito();
 
-    @Query("SELECT * FROM book WHERE leido LIKE 1")
+    @Query("SELECT * FROM book WHERE leido LIKE 1 AND papelera LIKE 0")
     List<Libro> getLeido();
 
-    @Query("SELECT * FROM book WHERE paraLeer LIKE 1")
+    @Query("SELECT * FROM book WHERE paraLeer LIKE 1 AND papelera LIKE 0")
     List<Libro> getParaLeer();
 
     @Query("SELECT * FROM book WHERE identifier LIKE :identifierBook")
