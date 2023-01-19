@@ -9,51 +9,98 @@
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        
-        <ImageView
-            android:id="@+id/imageBookItem"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src='@drawable/ic_launcher_background'>
-        </ImageView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/titulo_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@id/imageBookItem"
-            android:layout_toRightOf="@id/imageBookItem"
-            android:text="Titulo"
-            android:textSize="20sp"
-            android:textStyle="bold">
-        </TextView>
-        <TextView
-            android:id="@+id/autor_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/imageBookItem"
-            android:layout_below="@id/titulo_book"
-            android:text="Autor">
-        </TextView>
-        <TextView
-            android:id="@+id/formato_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/imageBookItem"
-            android:layout_below="@id/autor_book"
-            android:text="Formato">
-        </TextView>
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageBookItem"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:src='@drawable/ic_launcher_background'></ImageView>
+
+            <TextView
+                android:id="@+id/titulo_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@id/imageBookItem"
+                android:layout_toRightOf="@id/imageBookItem"
+                android:text="Titulo"
+                android:textSize="20sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/autor_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titulo_book"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imageBookItem"
+                android:text="Autor"></TextView>
+
+            <TextView
+                android:id="@+id/formato_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/autor_book"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imageBookItem"
+                android:text="Formato"></TextView>
+
+            <LinearLayout
+                android:id="@+id/layoutBotonesItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@id/imageBookItem"
+                android:layout_below="@id/formato_book"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButtonCardFavorito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_star_border" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonCardParaLeer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_access_time" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonCardLeido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_done_all_color" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonCardPapelera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_delete" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>
