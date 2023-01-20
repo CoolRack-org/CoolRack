@@ -52,7 +52,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         String titulo = model.get(position).getTitle();
         String autor = model.get(position).getAuthor();
         String formato = model.get(position).getFormat();
-        Bitmap imagen = new BitmapManager().bitmapUncompress(model.get(position).getImg()); //StringToBitMap(model.get(position).getImg());
+        Bitmap imagen = new BitmapManager().bitmapUncompress(model.get(position).getImg());
         Libro libro = model.get(position);
 
         holder.titulo.setText(titulo);
@@ -65,7 +65,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     }
 
     // cambia el color de la imagenes de los botones dependiendo de los booleanos del pojo
-    public void detectButtonsColor(ViewHolder holder, Libro libro){
+    private void detectButtonsColor(ViewHolder holder, Libro libro){
         // Boton favorito
             if (libro.getFavorito())
                 holder.bFaborito.setImageResource(R.drawable.ic_star_border_color);
@@ -111,7 +111,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         ImageView imagen;
         ImageButton bFaborito, bLeidos, bParaLeer, bPapelera;
         Libro libro;
-        //ArrayList<Libro> model;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -198,7 +197,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                 @Override
                 public void onClick(View view) {
                     libro.setPapelera(true);
-                    //bPapelera.setImageResource(R.drawable.ic_delete_color);
                     queryRecord.updateBook(libro);
 
                     model.remove(getPosition());
