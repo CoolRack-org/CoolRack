@@ -27,9 +27,6 @@ public class Papelera extends FatherMainFragment{
     @Override
     protected void personalizeFragment() {
         getActivity().setTitle("Papelera");
-
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -54,24 +51,4 @@ public class Papelera extends FatherMainFragment{
             }
         });
     }
-
-    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            Libro libro = listBook.get(viewHolder.getAdapterPosition());
-
-            Snackbar.make(linearLayout,libro.getTitle()+" eliminado de la papelera",Snackbar.LENGTH_LONG).show();
-
-            libro.setPapelera(false);
-            queryRecord.updateBook(libro);
-
-            listBook.remove(viewHolder.getAdapterPosition());
-            adapterPapelera.notifyDataSetChanged();
-        }
-    };
 }
