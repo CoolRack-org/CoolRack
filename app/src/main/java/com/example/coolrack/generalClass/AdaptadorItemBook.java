@@ -169,6 +169,9 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setLeido(true);
                         bLeidos.setImageResource(R.drawable.ic_done_all_color);
 
+                        libro.setParaLeer(false);
+                        bParaLeer.setImageResource(R.drawable.ic_access_time);
+
                         Snackbar.make(view,"Agragado a \"Leidos\"",Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
@@ -186,6 +189,9 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                     } else {
                         libro.setParaLeer(true);
                         bParaLeer.setImageResource(R.drawable.ic_access_time_color);
+
+                        libro.setLeido(false);
+                        bLeidos.setImageResource(R.drawable.ic_done_all);
 
                         Snackbar.make(view,"Agragado a \"Para Leer\"",Snackbar.LENGTH_LONG).show();
                     }
