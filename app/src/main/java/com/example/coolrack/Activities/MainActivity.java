@@ -25,6 +25,7 @@ import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
 import com.example.coolrack.fragments.Biblioteca;
 
+import com.example.coolrack.fragments.Favoritos;
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.fragments.Papelera;
 import com.example.coolrack.generalClass.GenerateBooks;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //despues se definiran con su respectiva clase para la navegacion
     //fragmentLeyendo == Fragmento inicial
     FragmentTransaction transactioni;
-    Fragment fragmentLeyendo, fragmentBiblioteca, fragmentPapelera;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -74,13 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView=(NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Creacion de objetos fragment y transaction
-        //esto despues se carga en el metedo onNavigationItemSelect para el cambio de dicho fragmento
-        fragmentLeyendo = new Leyendo();
-        fragmentBiblioteca = new Biblioteca();
-        fragmentPapelera = new Papelera();
-
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,fragmentLeyendo).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,new Leyendo()).commit();
 
     }
 
@@ -107,13 +101,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transactioni = getSupportFragmentManager().beginTransaction();
         switch (id){
             case R.id.nav_leyendo:
-                transactioni.replace(R.id.frame_layout,fragmentLeyendo).commit();
+                transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
                 break;
             case R.id.nav_biblioteca:
-                transactioni.replace(R.id.frame_layout,fragmentBiblioteca).commit();;
+                transactioni.replace(R.id.frame_layout,new Biblioteca()).commit();;
+                break;
+            case R.id.nav_favorito:
+                transactioni.replace(R.id.frame_layout,new Favoritos()).commit();;
                 break;
             case R.id.nav_papelera:
-                transactioni.replace(R.id.frame_layout,fragmentPapelera).commit();
+                transactioni.replace(R.id.frame_layout,new Papelera()).commit();
                 break;
             case R.id.nav_opciones:
                 startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
