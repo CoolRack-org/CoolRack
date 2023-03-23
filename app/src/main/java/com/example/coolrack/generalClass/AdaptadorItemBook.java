@@ -157,26 +157,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                 }
             });
 
-            bLeidos.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (libro.getLeido()){
-                        libro.setLeido(false);
-                        bLeidos.setImageResource(R.drawable.ic_done_all);
-
-                        Snackbar.make(view,"Quitado de \"Leidos\"",Snackbar.LENGTH_LONG).show();
-                    } else {
-                        libro.setLeido(true);
-                        bLeidos.setImageResource(R.drawable.ic_done_all_color);
-
-                        libro.setParaLeer(false);
-                        bParaLeer.setImageResource(R.drawable.ic_access_time);
-
-                        Snackbar.make(view,"Agragado a \"Leidos\"",Snackbar.LENGTH_LONG).show();
-                    }
-                    queryRecord.updateBook(libro);
-                }
-            });
 
             bParaLeer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -195,6 +175,21 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
 
                         Snackbar.make(view,"Agragado a \"Para Leer\"",Snackbar.LENGTH_LONG).show();
                     }
+                    queryRecord.updateBook(libro);
+                }
+            });
+
+            bLeidos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    libro.setLeido(true);
+                    libro.setParaLeer(false);
+
+                    model.remove(getPosition());
+                    notifyDataSetChanged();
+
+                    Snackbar.make(view,"Agragado a \"Leidos\"",Snackbar.LENGTH_LONG).show();
+
                     queryRecord.updateBook(libro);
                 }
             });
