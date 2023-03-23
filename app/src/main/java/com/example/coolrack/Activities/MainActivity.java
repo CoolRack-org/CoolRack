@@ -24,6 +24,7 @@ import com.example.coolrack.R;
 
 import com.example.coolrack.fragments.FatherMainFragment;
 import com.example.coolrack.fragments.Favoritos;
+import com.example.coolrack.fragments.Leidos;
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.fragments.Papelera;
 import com.google.android.material.navigation.NavigationView;
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_favorito:
                 transactioni.replace(R.id.frame_layout,new Favoritos()).commit();;
+                break;
+            case R.id.nav_leidos:
+                transactioni.replace(R.id.frame_layout,new Leidos()).commit();;
                 break;
             case R.id.nav_papelera:
                 transactioni.replace(R.id.frame_layout,new Papelera()).commit();

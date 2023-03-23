@@ -20,6 +20,10 @@
             android:icon="@drawable/ic_star_border"
             android:title="Favoritos" />
         <item
+            android:id="@+id/nav_leidos"
+            android:icon="@drawable/ic_done_all"
+            android:title="Leidos" />
+        <item
             android:id="@+id/nav_papelera"
             android:icon="@drawable/ic_delete"
             android:title="Papelera" />

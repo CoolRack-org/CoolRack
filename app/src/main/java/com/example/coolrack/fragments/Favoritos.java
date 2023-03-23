@@ -19,6 +19,7 @@ public class Favoritos extends FatherMainFragment{
 
     @Override
     protected void personalizeFragment() {
+        this.seccion = "Favoritos";
         getActivity().setTitle("Favoritos");
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
@@ -44,7 +45,7 @@ public class Favoritos extends FatherMainFragment{
             libro.setFavorito(false);
             queryRecord.updateBook(libro);
 
-            Snackbar.make(linearLayout,libro.getTitle()+" eliminado de FAVORITOS",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(linearLayout,libro.getTitle()+" eliminado de \"Favoritos\"",Snackbar.LENGTH_LONG).show();
 
             listBook.remove(viewHolder.getAdapterPosition());
             adapterItem.notifyDataSetChanged();

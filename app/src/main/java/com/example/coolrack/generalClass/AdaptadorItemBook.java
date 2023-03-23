@@ -164,6 +164,11 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         Snackbar.make(view,"Agragado a \"Favoritos\"",Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
+
+                    if (seccion == "Favoritos"){
+                        model.remove(getPosition());
+                        notifyDataSetChanged();
+                    }
                 }
             });
 
@@ -186,6 +191,11 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         Snackbar.make(view,"Agragado a \"Para Leer\"",Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
+
+                    if (seccion == "Leidos"){
+                        model.remove(getPosition());
+                        notifyDataSetChanged();
+                    }
                 }
             });
 
@@ -209,7 +219,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                     }
                     queryRecord.updateBook(libro);
 
-                    if (seccion == "Leyendo"){
+                    if (seccion == "Leyendo" || seccion == "Leidos"){
                         model.remove(getPosition());
                         notifyDataSetChanged();
                     }

@@ -28,14 +28,13 @@ public class FatherMainFragment extends Fragment {
     protected RecyclerView recyclerView;
     protected ArrayList<Libro> listBook;
     protected LinearLayout linearLayout;
+    protected String seccion = "";
 
     protected QueryRecord queryRecord;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Biblioteca");
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_father_main, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -43,18 +42,20 @@ public class FatherMainFragment extends Fragment {
         linearLayout = view.findViewById(R.id.bibliotecaLayout);
         queryRecord = QueryRecord.get(this.getContext());
 
+        personalizeFragment();
+
         //cargar lista
         cargarLista();
         //mostrar data
         mostrarData();
 
-        personalizeFragment();
-
         return view;
     }
 
     // metodo que permite personalizar/realizar acciones nuevas cuando se ejecuta un onCreateView en un fragment hijo
-    protected void personalizeFragment(){}
+    protected void personalizeFragment(){
+        getActivity().setTitle("Biblioteca");
+    }
 
     protected void cargarLista(){
         this.listBook = (ArrayList<Libro>) queryRecord.getAll();
@@ -63,7 +64,7 @@ public class FatherMainFragment extends Fragment {
     //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
     protected void mostrarData(){
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterItem = new AdaptadorItemBook(getContext(),this.listBook);
+        adapterItem = new AdaptadorItemBook(getContext(),this.listBook, seccion);
         recyclerView.setAdapter(adapterItem);
 
         //Te redirecciona al perfil del usuario (Activity)
