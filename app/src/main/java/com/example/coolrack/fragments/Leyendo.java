@@ -42,6 +42,25 @@ public class Leyendo extends FatherMainFragment{
         this.listBook = (ArrayList<Libro>) this.queryRecord.getLeyendo();
     }
 
+    //Muestra el contenido de los Libros y dicta su comportamiento al hacer click en el
+    @Override
+    protected void mostrarData(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterItem = new AdaptadorItemBook(getContext(),this.listBook, "Leyendo");
+        recyclerView.setAdapter(adapterItem);
+
+        //Te redirecciona al perfil del usuario (Activity)
+        adapterItem.setOnclickLister(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Libro libro = listBook.get(recyclerView.getChildAdapterPosition(view));
+
+                // Le pasa a la actividad del perfil del libro el POJO con los datos del libro correspondiente
+                new TransitionManager(getContext()).goToPerfilLibro(libro.getIdentifier());
+            }
+        });
+    }
+
     ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

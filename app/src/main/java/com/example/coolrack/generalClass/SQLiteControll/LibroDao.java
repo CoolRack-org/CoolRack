@@ -24,7 +24,7 @@ public interface LibroDao {
     @Query("SELECT * FROM book WHERE papelera LIKE 0")
     List<Libro> getAll();
 
-    @Query("SELECT * FROM book WHERE leyendo LIKE 1 AND papelera LIKE 0")
+    @Query("SELECT * FROM book WHERE leyendo LIKE 1 AND papelera LIKE 0 AND leido LIKE 0")
     List<Libro> getLeyendo();
 
     @Query("SELECT * FROM book WHERE papelera LIKE 1")
