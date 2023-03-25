@@ -3,10 +3,7 @@ package com.example.coolrack.generalClass;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Environment;
-import android.provider.MediaStore;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
@@ -21,7 +18,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubReader;

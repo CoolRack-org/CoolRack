@@ -1,12 +1,16 @@
 package com.example.coolrack.fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,7 @@ import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.example.coolrack.generalClass.TransitionManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -29,6 +34,7 @@ public class FatherMainFragment extends Fragment {
     protected ArrayList<Libro> listBook;
     protected LinearLayout linearLayout;
     protected String seccion = "";
+    protected String textoCallback = "";
 
     protected QueryRecord queryRecord;
 
@@ -52,11 +58,12 @@ public class FatherMainFragment extends Fragment {
         return view;
     }
 
-    // metodo que permite personalizar/realizar acciones nuevas cuando se ejecuta un onCreateView en un fragment hijo
+    // Metodo que permite personalizar/realizar acciones nuevas cuando se ejecuta un onCreateView en un fragment hijo
     protected void personalizeFragment(){
         getActivity().setTitle("Biblioteca");
     }
 
+    // Introduce los libros que se tienen que mostrar en un array para procesarlos
     protected void cargarLista(){
         this.listBook = (ArrayList<Libro>) queryRecord.getAll();
     }
@@ -78,6 +85,32 @@ public class FatherMainFragment extends Fragment {
             }
         });
     }
+
+    // Permite deslizar las cards de los libros, esto lo usamos para eliminar los libros de una lista/seccion mas comodamente.
+    ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Libro libro = listBook.get(viewHolder.getAdapterPosition());
+            Log.i(TAG,libro.getTitle());
+
+            // Update estado del libro en DB
+            personalizeCallback(libro);
+
+            Snackbar.make(linearLayout,textoCallback,Snackbar.LENGTH_LONG).show();
+
+            listBook.remove(viewHolder.getAdapterPosition());
+            adapterItem.notifyDataSetChanged();
+        }
+    };
+
+    // Permite a los fragments hijos personalizar las acciones que se realizaran en el callback, concretamente el metodo onSwiped. Esto permite
+    // a a los fragments hijos no tener que crear un nuevo callback y decirle que datos modificar y actualizar de la base de datos.
+    protected void personalizeCallback(Libro libro){}
 
     @Override
     public void onResume() {

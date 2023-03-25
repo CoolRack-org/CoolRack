@@ -1,20 +1,12 @@
 package com.example.coolrack.fragments;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coolrack.generalClass.AdaptadorItemBook;
 import com.example.coolrack.generalClass.AdaptadorItemPapelera;
 import com.example.coolrack.generalClass.Libro;
 import com.example.coolrack.generalClass.TransitionManager;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 

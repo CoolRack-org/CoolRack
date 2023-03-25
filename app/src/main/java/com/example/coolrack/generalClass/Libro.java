@@ -1,14 +1,9 @@
 package com.example.coolrack.generalClass;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Dao;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
