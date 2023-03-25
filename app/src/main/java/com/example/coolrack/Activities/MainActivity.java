@@ -27,6 +27,7 @@ import com.example.coolrack.fragments.Favoritos;
 import com.example.coolrack.fragments.Leidos;
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.fragments.Papelera;
+import com.example.coolrack.fragments.ParaLeer;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_biblioteca:
                 transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();;
+                break;
+            case R.id.nav_para_leer:
+                transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();;
                 break;
             case R.id.nav_favorito:
                 transactioni.replace(R.id.frame_layout,new Favoritos()).commit();;

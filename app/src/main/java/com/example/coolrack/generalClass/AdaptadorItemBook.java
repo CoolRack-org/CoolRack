@@ -191,7 +191,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                     }
                     queryRecord.updateBook(libro);
 
-                    if (seccion == "Leidos"){
+                    if (seccion == "Leidos" || seccion == "Para Leer"){
                         model.remove(getPosition());
                         notifyDataSetChanged();
                     }
@@ -218,7 +218,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                     }
                     queryRecord.updateBook(libro);
 
-                    if (seccion == "Leyendo" || seccion == "Leidos"){
+                    if (seccion == "Leyendo" || seccion == "Leidos" || seccion == "Para Leer"){
                         model.remove(getPosition());
                         notifyDataSetChanged();
                     }
