@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //menu
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
+    public Menu fragmentsOptionsMenu;
 
     //declaracion de fragmentos y transacion
     //despues se definiran con su respectiva clase para la navegacion
@@ -53,17 +54,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // drawer layout instance to toggle the menu icon to open
-        // drawer and back button to close drawer
+        //Instancia de diseño de cajón para alternar el icono de menú para abrir
+        //Cajón y botón de retroceso para cerrar el cajón
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
+        //Pase el botón de alternancia Abrir y Cerrar para el detector de diseño de cajón
+        //Para alternar el botón
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        // to make the Navigation drawer icon always appear on the action bar
+        // para que el icono del cajón de navegación aparezca siempre en la barra de acciones
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView=(NavigationView) findViewById(R.id.navigationView);
@@ -73,18 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-//-------------------------------------------------------------------------------------------------------------
-    // Cierra el menu
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//---- Comportamiento de los menus ---------------------------------------------------------------------------------------------------------
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    //permite la navegacion a las opciones del menu
+    // se ejecuta cuando el usuario selecciona un item del menu de navegacion entre ventanas(fragments)
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         gestorTransiciones(item.getItemId());
@@ -94,34 +86,78 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //realiza la transicion entre fragmentos
     public void gestorTransiciones(int id){
         transactioni = getSupportFragmentManager().beginTransaction();
+
         switch (id){
+            // ventana de "leyendo" donde se muestran los ultimos libros abiertos
             case R.id.nav_leyendo:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
                 transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
                 break;
+            // ventana de la biblioteca donde se muestran todos los libros
             case R.id.nav_biblioteca:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
                 transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();;
                 break;
+            // ventana de libros marcados como "Para Leer"
             case R.id.nav_para_leer:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
                 transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();;
                 break;
+            // ventana de libros marcados como "Favoritos"
             case R.id.nav_favorito:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
                 transactioni.replace(R.id.frame_layout,new Favoritos()).commit();;
                 break;
+            // ventana de libros marcados como "Leidos"
             case R.id.nav_leidos:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
                 transactioni.replace(R.id.frame_layout,new Leidos()).commit();;
                 break;
+            // ventana de papelera de reciclaje
             case R.id.nav_papelera:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(true);
                 transactioni.replace(R.id.frame_layout,new Papelera()).commit();
                 break;
+            // ventana de opciones de configuracio de la aplicacion
             case R.id.nav_opciones:
                 startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
                 break;
+            // ventana de inforrmacion de la aplicacion
             case R.id.nav_info:
                 startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
                 break;
         }
+        // cierra el menu despues de seleccionar una opcion con una animaciuon a la izquierda
         this.drawerLayout.closeDrawer(Gravity.LEFT);
     }
+
+    // Crea el menu de opciones de los activity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        fragmentsOptionsMenu = menu;
+        getMenuInflater().inflate(R.menu.fragments_menu, menu);
+        fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+        return true;
+    }
+
+    //  Dicta como actuan las opciones del ActivityBar al ser ejecutadas,
+    //  en concreto las opciones situadas a la derecha.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Abre el menu de de navegacion entre fragments, de caso contrario  ejecuta una de las otras opciones del "Bar"
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+
+        }else{
+            switch (item.getItemId()) {
+                case R.id.optionDelate:
+                    startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }}
+    }
+
 //-------------------------------------------------------------------------------------------------------------
 
     // Pide los permisos necesarios para el comodo funcionamiento del programa al usuario.
