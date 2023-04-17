@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Papelera Vacía"
+            android:textAlignment="center"
+            android:textSize="34sp" />
+
+        <CheckBox
+            android:id="@+id/checkBorrarDelDispositivo"
+            style="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Eliminar los archivos del dispositivo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundTint="#EC0909"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textoAlertPapelera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Los documentos serán borrados de la aplicación"
+                android:textAlignment="center"
+                android:textColor="#7E7E7E"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnConfirmDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Limpiar"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

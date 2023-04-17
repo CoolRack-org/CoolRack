@@ -1,20 +1,31 @@
 package com.example.coolrack.Activities;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -29,6 +40,8 @@ import com.example.coolrack.fragments.Leidos;
 import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.fragments.Papelera;
 import com.example.coolrack.fragments.ParaLeer;
+import com.example.coolrack.generalClass.MenuOptions;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,22 +109,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // ventana de la biblioteca donde se muestran todos los libros
             case R.id.nav_biblioteca:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();;
+                transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();
                 break;
             // ventana de libros marcados como "Para Leer"
             case R.id.nav_para_leer:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();;
+                transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();
                 break;
             // ventana de libros marcados como "Favoritos"
             case R.id.nav_favorito:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Favoritos()).commit();;
+                transactioni.replace(R.id.frame_layout,new Favoritos()).commit();
                 break;
             // ventana de libros marcados como "Leidos"
             case R.id.nav_leidos:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Leidos()).commit();;
+                transactioni.replace(R.id.frame_layout,new Leidos()).commit();
                 break;
             // ventana de papelera de reciclaje
             case R.id.nav_papelera:
@@ -151,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             switch (item.getItemId()) {
                 case R.id.optionDelate:
-                    startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
+                    new MenuOptions(this).buttonDelate(getLayoutInflater());
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
