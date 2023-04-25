@@ -17,6 +17,13 @@
             android:textAlignment="center"
             android:textSize="34sp" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AVISO: Si no tiene los permisos activados no se podran borrar libros del sistema."
+            android:textAlignment="center" />
+
         <CheckBox
             android:id="@+id/checkBorrarDelDispositivo"
             style="?android:attr/textAppearanceMedium"

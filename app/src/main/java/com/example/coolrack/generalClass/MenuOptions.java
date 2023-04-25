@@ -67,13 +67,21 @@ public class MenuOptions {
                     @Override
                     public void onClick(View v) {
                         QueryRecord queryRecord = QueryRecord.get(context);
+                        GenerateBooks generateBooks = new GenerateBooks(context);
                         ArrayList<Libro> libros = (ArrayList<Libro>) queryRecord.getPapelera();
 
+                        // Si es verdadero se borran los libros de la DB y del sistema
+                        // Si es falso solo se borran de la DB
                         if (checkBox.isChecked()){
-
+                            for (Libro l : libros){
+                                queryRecord.deleteBook(l);
+                                generateBooks.removeBook(l.getCopyBookUrl());
+                                generateBooks.removeBook(l.getOriginalBookUrl());
+                            }
                         }else {
                             for (Libro l : libros){
                                 queryRecord.deleteBook(l);
+                                generateBooks.removeBook(l.getCopyBookUrl());
                             }
                         }
 
