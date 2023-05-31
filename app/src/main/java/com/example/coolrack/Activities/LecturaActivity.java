@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coolrack.R;
 import com.example.coolrack.controlBook.EpubReaderView;
 import com.example.coolrack.generalClass.GenerateBooks;
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 import org.json.JSONObject;

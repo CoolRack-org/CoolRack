@@ -4,8 +4,8 @@ import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.coolrack.generalClass.AdaptadorItemPapelera;
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.adaptadores.AdaptadorItemPapelera;
+import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.TransitionManager;
 
 import java.util.ArrayList;

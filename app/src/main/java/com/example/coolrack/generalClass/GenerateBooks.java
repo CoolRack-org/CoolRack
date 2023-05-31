@@ -8,6 +8,7 @@ import android.os.Environment;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.List;
 

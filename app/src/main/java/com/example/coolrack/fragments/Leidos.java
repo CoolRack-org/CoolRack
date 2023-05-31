@@ -2,7 +2,7 @@ package com.example.coolrack.fragments;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.ArrayList;
 

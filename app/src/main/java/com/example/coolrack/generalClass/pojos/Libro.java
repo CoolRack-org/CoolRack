@@ -1,4 +1,4 @@
-package com.example.coolrack.generalClass;
+package com.example.coolrack.generalClass.pojos;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -59,7 +59,20 @@ public class Libro  implements Serializable {
     private byte[] img;
 
     @Ignore
+    private String urlImage;
+
+    @Ignore
+    private int idRemoteDB;
+
+    @Ignore
     public Libro() {}
+
+    @Ignore
+    public Libro(@NonNull int idRemoteDB, String title, String urlImage) {
+        this.idRemoteDB = idRemoteDB;
+        this.title = title;
+        this.urlImage = urlImage;
+    }
 
     public Libro(@NonNull String identifier, String title, String author, String serie, String language, String originalBookUrl,
                  String copyBookUrl, String format, boolean leyendo, boolean papelera, boolean favorito, boolean leido, boolean paraLeer, byte[] img) {
@@ -197,5 +210,21 @@ public class Libro  implements Serializable {
 
     public void setParaLeer(boolean paraLeer) {
         this.paraLeer = paraLeer;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public int getIdRemoteDB() {
+        return idRemoteDB;
+    }
+
+    public void setIdRemoteDB(int idRemoteDB) {
+        this.idRemoteDB = idRemoteDB;
     }
 }

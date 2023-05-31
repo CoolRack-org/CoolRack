@@ -1,4 +1,4 @@
-package com.example.coolrack.generalClass;
+package com.example.coolrack.generalClass.adaptadores;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+import com.example.coolrack.generalClass.TransitionManager;
+import com.example.coolrack.generalClass.pojos.Libro;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;

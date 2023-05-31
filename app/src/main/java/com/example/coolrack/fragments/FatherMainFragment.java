@@ -3,6 +3,11 @@ package com.example.coolrack.fragments;
 import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,15 +15,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
 import com.example.coolrack.R;
-import com.example.coolrack.generalClass.AdaptadorItemBook;
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.adaptadores.AdaptadorItemBook;
+import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.example.coolrack.generalClass.TransitionManager;
 import com.google.android.material.snackbar.Snackbar;

@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.List;
 

@@ -1,31 +1,20 @@
 package com.example.coolrack.Activities;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,7 +22,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
-
 import com.example.coolrack.fragments.FatherMainFragment;
 import com.example.coolrack.fragments.Favoritos;
 import com.example.coolrack.fragments.Leidos;
@@ -41,8 +29,8 @@ import com.example.coolrack.fragments.Leyendo;
 import com.example.coolrack.fragments.Papelera;
 import com.example.coolrack.fragments.ParaLeer;
 import com.example.coolrack.generalClass.MenuOptions;
-import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //valor que indica si el usuario acepto el permiso
@@ -65,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         verificarPermisos();
 
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
         //Instancia de diseño de cajón para alternar el icono de menú para abrir
@@ -104,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // ventana de "leyendo" donde se muestran los ultimos libros abiertos
             case R.id.nav_leyendo:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
+                startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
+                //transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
                 break;
             // ventana de la biblioteca donde se muestran todos los libros
             case R.id.nav_biblioteca:

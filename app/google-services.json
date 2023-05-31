@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1052349376050",
+    "firebase_url": "https://coolrack-b7f03-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "coolrack-b7f03",
+    "storage_bucket": "coolrack-b7f03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052349376050:android:7d7470387ffe39fe9cfe2b",
+        "android_client_info": {
+          "package_name": "com.example.coolrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052349376050-ua15hptak54k4vuseih9odd8j2tl8e9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZaGltEX4Wrg07Y8Uegrp-DeJzk_IeMGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052349376050-ua15hptak54k4vuseih9odd8j2tl8e9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

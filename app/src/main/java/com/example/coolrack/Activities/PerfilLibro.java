@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.ImagesManagers.BitmapManager;
-import com.example.coolrack.generalClass.Libro;
+import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 
 public class PerfilLibro extends AppCompatActivity {

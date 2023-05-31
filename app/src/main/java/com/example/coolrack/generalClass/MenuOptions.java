@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.ArrayList;
 
