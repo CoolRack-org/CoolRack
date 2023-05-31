@@ -1,4 +1,4 @@
-package com.example.coolrack.fragments;
+package com.example.coolrack.Activities.ui.main.MainFragments;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 
@@ -6,27 +6,27 @@ import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.ArrayList;
 
-public class Favoritos extends FatherMainFragment{
+public class ParaLeer extends FatherMainFragment{
 
-    public Favoritos() {}
+    public ParaLeer() {}
 
     @Override
     protected void personalizeFragment() {
-        this.seccion = "Favoritos";
-        getActivity().setTitle("Favoritos");
-        this.textoCallback = "Quitado de \"Favoritos\"";
+        this.seccion = "Para Leer";
+        getActivity().setTitle("Para Leer");
+        this.textoCallback = "Quitado de \"Para Leer\"";
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }
 
     @Override
     protected void cargarLista(){
-        this.listBook = (ArrayList<Libro>) this.queryRecord.getFavorito();
+        this.listBook = (ArrayList<Libro>) this.queryRecord.getParaLeer();
     }
 
     @Override
     protected void personalizeCallback(Libro libro) {
-        libro.setFavorito(false);
+        libro.setParaLeer(false);
         queryRecord.updateBook(libro);
     }
 }

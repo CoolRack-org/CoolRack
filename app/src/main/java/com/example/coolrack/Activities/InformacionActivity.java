@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.coolrack.Activities.ui.main.SectionsPagerAdapter;
+import com.example.coolrack.Activities.ui.informacion.SectionsPagerAdapter;
 import com.example.coolrack.databinding.ActivityInformacionBinding;
 import com.google.android.material.tabs.TabLayout;
 

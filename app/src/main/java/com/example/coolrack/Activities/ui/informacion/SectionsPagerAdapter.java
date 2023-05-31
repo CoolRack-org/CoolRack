@@ -1,4 +1,4 @@
-package com.example.coolrack.Activities.ui.main;
+package com.example.coolrack.Activities.ui.informacion;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.coolrack.R;
-import com.example.coolrack.fragments.InfoFragments.PlaceholderFragmentInformacion;
+import com.example.coolrack.Activities.ui.informacion.InfoFragments.PlaceholderFragmentInformacion;
 
 
 /**

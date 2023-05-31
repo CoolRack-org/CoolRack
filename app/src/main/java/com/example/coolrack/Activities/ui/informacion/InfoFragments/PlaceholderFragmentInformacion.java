@@ -1,4 +1,4 @@
-package com.example.coolrack.fragments.InfoFragments;
+package com.example.coolrack.Activities.ui.informacion.InfoFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.coolrack.Activities.ui.main.PageViewModel;
+import com.example.coolrack.Activities.ui.informacion.PageViewModel;
 import com.example.coolrack.databinding.FragmentInformacionBinding;
 
 public class PlaceholderFragmentInformacion extends Fragment {

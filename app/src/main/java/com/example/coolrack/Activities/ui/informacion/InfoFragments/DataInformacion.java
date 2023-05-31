@@ -1,4 +1,4 @@
-package com.example.coolrack.fragments.InfoFragments;
+package com.example.coolrack.Activities.ui.informacion.InfoFragments;
 
 public class DataInformacion {
 

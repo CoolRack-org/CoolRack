@@ -1,4 +1,4 @@
-package com.example.coolrack.Activities.ui.main;
+package com.example.coolrack.Activities.ui.informacion;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.example.coolrack.fragments.InfoFragments.DataInformacion;
+import com.example.coolrack.Activities.ui.informacion.InfoFragments.DataInformacion;
 
 public class PageViewModel extends ViewModel {
 

@@ -22,12 +22,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
-import com.example.coolrack.fragments.FatherMainFragment;
-import com.example.coolrack.fragments.Favoritos;
-import com.example.coolrack.fragments.Leidos;
-import com.example.coolrack.fragments.Leyendo;
-import com.example.coolrack.fragments.Papelera;
-import com.example.coolrack.fragments.ParaLeer;
+import com.example.coolrack.Activities.ui.main.MainFragments.FatherMainFragment;
+import com.example.coolrack.Activities.ui.main.MainFragments.Favoritos;
+import com.example.coolrack.Activities.ui.main.MainFragments.Leidos;
+import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
+import com.example.coolrack.Activities.ui.main.MainFragments.Papelera;
+import com.example.coolrack.Activities.ui.main.MainFragments.ParaLeer;
 import com.example.coolrack.generalClass.MenuOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // ventana de "leyendo" donde se muestran los ultimos libros abiertos
             case R.id.nav_leyendo:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
+                startActivity(new Intent(this, com.example.coolrack.Activities.Tienda.class));
                 //transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
                 break;
             // ventana de la biblioteca donde se muestran todos los libros

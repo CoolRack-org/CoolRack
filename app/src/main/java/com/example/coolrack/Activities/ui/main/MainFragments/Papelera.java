@@ -1,4 +1,4 @@
-package com.example.coolrack.fragments;
+package com.example.coolrack.Activities.ui.main.MainFragments;
 
 import android.view.View;
 
