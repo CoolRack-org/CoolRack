@@ -93,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // ventana de "leyendo" donde se muestran los ultimos libros abiertos
             case R.id.nav_leyendo:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                startActivity(new Intent(this, com.example.coolrack.Activities.Tienda.class));
-                //transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
+                transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
                 break;
             // ventana de la biblioteca donde se muestran todos los libros
             case R.id.nav_biblioteca:
@@ -120,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_papelera:
                 fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(true);
                 transactioni.replace(R.id.frame_layout,new Papelera()).commit();
+                break;
+            // ventana de la tienda de libros
+            case R.id.nav_tienda:
+                startActivity(new Intent(this, com.example.coolrack.Activities.Tienda.class));
                 break;
             // ventana de opciones de configuracio de la aplicacion
             case R.id.nav_opciones:

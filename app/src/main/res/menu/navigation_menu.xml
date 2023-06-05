@@ -31,6 +31,10 @@
             android:id="@+id/nav_papelera"
             android:icon="@drawable/ic_delete"
             android:title="Papelera" />
+        <item
+            android:id="@+id/nav_tienda"
+            android:icon="@drawable/ic_tienda"
+            android:title="La gran Libreria" />
     </group>
 
     <group android:id="@+id/options">

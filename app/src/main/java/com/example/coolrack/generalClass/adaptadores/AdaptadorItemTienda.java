@@ -1,62 +1,54 @@
 package com.example.coolrack.generalClass.adaptadores;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.List;
 
-public class AdaptadorItemTienda extends RecyclerView.Adapter<AdaptadorItemTienda.LibroViewHolder> {
+public class AdaptadorItemTienda extends RecyclerView.Adapter<AdaptadorItemTienda.BookViewHolder> {
 
-    private List<Libro> libroList;
-    private Context context;
+    private List<Libro> books;
 
-    public AdaptadorItemTienda(List<Libro> libroList, Context context) {
-        this.libroList = libroList;
-        this.context = context;
+    public AdaptadorItemTienda(List<Libro> books){//, AdapterView.OnItemClickListener listener) {
+        this.books = books;
     }
 
-    @NonNull
     @Override
-    public LibroViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_tienda, parent, false);
-        return new LibroViewHolder(view);
+        return new BookViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LibroViewHolder holder, int position) {
-        Libro libro = libroList.get(position);
-        holder.tituloTextView.setText(libro.getTitle());
-        Glide.with(context)
-                .load(libro.getUrlImage())
-                //.placeholder(R.drawable.placeholder)
-                .into(holder.portadaImageView);
+    public void onBindViewHolder(BookViewHolder holder, int position) {
+        Glide.with(holder.itemView)
+                .load("https://i.postimg.cc/nz6dyrHd/cw.jpg")//books.get(superPosition).getImg())
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return libroList.size();
+        return books.size();
     }
 
-    public class LibroViewHolder extends RecyclerView.ViewHolder {
+    public interface OnItemClickListener {
+    }
 
-        public TextView tituloTextView;
-        public ImageView portadaImageView;
+    public static class BookViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
+        ImageView imageView;
 
-        public LibroViewHolder(@NonNull View itemView) {
+        public BookViewHolder(View itemView) {
             super(itemView);
-            tituloTextView = itemView.findViewById(R.id.tituloTextView);
-            portadaImageView = itemView.findViewById(R.id.portadaImageView);
+            cardView = itemView.findViewById(R.id.cardviewTienda);
+            imageView = itemView.findViewById(R.id.coverTiendaImg);
         }
     }
 }
