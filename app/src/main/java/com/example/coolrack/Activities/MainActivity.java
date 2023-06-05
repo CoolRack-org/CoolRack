@@ -18,16 +18,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
 import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
-import com.example.coolrack.Activities.ui.main.MainFragments.FatherMainFragment;
-import com.example.coolrack.Activities.ui.main.MainFragments.Favoritos;
-import com.example.coolrack.Activities.ui.main.MainFragments.Leidos;
-import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
-import com.example.coolrack.Activities.ui.main.MainFragments.Papelera;
-import com.example.coolrack.Activities.ui.main.MainFragments.ParaLeer;
 import com.example.coolrack.generalClass.MenuOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
@@ -40,11 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public Menu fragmentsOptionsMenu;
-
-    //declaracion de fragmentos y transacion
-    //despues se definiran con su respectiva clase para la navegacion
-    //fragmentLeyendo == Fragmento inicial
-    FragmentTransaction transactioni;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -81,60 +70,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // se ejecuta cuando el usuario selecciona un item del menu de navegacion entre ventanas(fragments)
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        gestorTransiciones(item.getItemId());
-        return false;
-    }
 
-    //realiza la transicion entre fragmentos
-    public void gestorTransiciones(int id){
-        transactioni = getSupportFragmentManager().beginTransaction();
+        //realiza la transicion entre fragmentos
+        new MenuOptions(this).mainMenuSwitch(
+                item.getItemId(),
+                getSupportFragmentManager().beginTransaction(),
+                fragmentsOptionsMenu);
 
-        switch (id){
-            // ventana de "leyendo" donde se muestran los ultimos libros abiertos
-            case R.id.nav_leyendo:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
-                break;
-            // ventana de la biblioteca donde se muestran todos los libros
-            case R.id.nav_biblioteca:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();
-                break;
-            // ventana de libros marcados como "Para Leer"
-            case R.id.nav_para_leer:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();
-                break;
-            // ventana de libros marcados como "Favoritos"
-            case R.id.nav_favorito:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Favoritos()).commit();
-                break;
-            // ventana de libros marcados como "Leidos"
-            case R.id.nav_leidos:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
-                transactioni.replace(R.id.frame_layout,new Leidos()).commit();
-                break;
-            // ventana de papelera de reciclaje
-            case R.id.nav_papelera:
-                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(true);
-                transactioni.replace(R.id.frame_layout,new Papelera()).commit();
-                break;
-            // ventana de la tienda de libros
-            case R.id.nav_tienda:
-                startActivity(new Intent(this, com.example.coolrack.Activities.Tienda.class));
-                break;
-            // ventana de opciones de configuracio de la aplicacion
-            case R.id.nav_opciones:
-                startActivity(new Intent(this, com.example.coolrack.Activities.SettingsActivity.class));
-                break;
-            // ventana de inforrmacion de la aplicacion
-            case R.id.nav_info:
-                startActivity(new Intent(this, com.example.coolrack.Activities.InformacionActivity.class));
-                break;
-        }
         // cierra el menu despues de seleccionar una opcion con una animaciuon a la izquierda
         this.drawerLayout.closeDrawer(Gravity.LEFT);
+
+        return false;
     }
 
     // Crea el menu de opciones de los activity
@@ -157,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else{
             switch (item.getItemId()) {
                 case R.id.optionDelate:
-                    new MenuOptions(this).buttonDelate(getLayoutInflater());
+                    new MenuOptions(this).buttonDelate(getLayoutInflater(), getSupportFragmentManager().beginTransaction());
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);

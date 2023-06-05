@@ -97,7 +97,8 @@ public class GenerateBooks {
             l.setLanguage(b.getMetadata().getLanguage());
             l.setIdentifier(b.getMetadata().getIdentifiers().get(0).getValue());
             l.setOriginalBookUrl(absolutePath);
-            l.setFormat(b.getMetadata().getFormat());
+            //l.setFormat(b.getMetadata().getFormat());
+            l.setFormat("EPUB");
             l.setLeyendo(leyendo);
 
             l.setCopyBookUrl(createBook(b));

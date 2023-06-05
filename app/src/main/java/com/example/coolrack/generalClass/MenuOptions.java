@@ -1,8 +1,10 @@
 package com.example.coolrack.generalClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,7 +12,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.coolrack.Activities.ui.main.MainFragments.FatherMainFragment;
+import com.example.coolrack.Activities.ui.main.MainFragments.Favoritos;
+import com.example.coolrack.Activities.ui.main.MainFragments.Leidos;
+import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
+import com.example.coolrack.Activities.ui.main.MainFragments.Papelera;
+import com.example.coolrack.Activities.ui.main.MainFragments.ParaLeer;
 import com.example.coolrack.R;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.example.coolrack.generalClass.pojos.Libro;
@@ -30,7 +39,56 @@ public class MenuOptions {
         this.context = context;
     }
 
-    public void buttonDelate(LayoutInflater inflater){
+    public void mainMenuSwitch(int id, FragmentTransaction transactioni, Menu fragmentsOptionsMenu){
+
+
+        switch (id){
+            // ventana de "leyendo" donde se muestran los ultimos libros abiertos
+            case R.id.nav_leyendo:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+                transactioni.replace(R.id.frame_layout,new Leyendo()).commit();
+                break;
+            // ventana de la biblioteca donde se muestran todos los libros
+            case R.id.nav_biblioteca:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+                transactioni.replace(R.id.frame_layout,new FatherMainFragment()).commit();
+                break;
+            // ventana de libros marcados como "Para Leer"
+            case R.id.nav_para_leer:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+                transactioni.replace(R.id.frame_layout,new ParaLeer()).commit();
+                break;
+            // ventana de libros marcados como "Favoritos"
+            case R.id.nav_favorito:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+                transactioni.replace(R.id.frame_layout,new Favoritos()).commit();
+                break;
+            // ventana de libros marcados como "Leidos"
+            case R.id.nav_leidos:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(false);
+                transactioni.replace(R.id.frame_layout,new Leidos()).commit();
+                break;
+            // ventana de papelera de reciclaje
+            case R.id.nav_papelera:
+                fragmentsOptionsMenu.findItem(R.id.optionDelate).setVisible(true);
+                transactioni.replace(R.id.frame_layout,new Papelera()).commit();
+                break;
+            // ventana de la tienda de libros
+            case R.id.nav_tienda:
+                context.startActivity(new Intent(context, com.example.coolrack.Activities.Tienda.class));
+                break;
+            // ventana de opciones de configuracio de la aplicacion
+            case R.id.nav_opciones:
+                context.startActivity(new Intent(context, com.example.coolrack.Activities.SettingsActivity.class));
+                break;
+            // ventana de inforrmacion de la aplicacion
+            case R.id.nav_info:
+                context.startActivity(new Intent(context, com.example.coolrack.Activities.InformacionActivity.class));
+                break;
+        }
+    }
+
+    public void buttonDelate(LayoutInflater inflater, FragmentTransaction transactioni){
         final AlertDialog alertDialog;
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
