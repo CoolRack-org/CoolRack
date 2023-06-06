@@ -234,8 +234,8 @@ public class EpubReaderView extends WebView {
             ProcessJavascript("var elements = document.getElementsByTagName('*');\n" +
                     "for (var i = 0; i < elements.length; i++) {\n" +
                     " if(elements[i].tagName!=\"SPAN\")\n" +
-                    "  elements[i].style.backgroundColor='black';\n" +
-                    "elements[i].style.color='white';\n" +
+                    "  elements[i].style.backgroundColor='#1b1b1b';\n" +
+                    "elements[i].style.color='#fff';\n" +
                     "}","changeTheme");
         }
     }
