@@ -35,10 +35,9 @@ public class LibroTienda {
     }
 
     // constructor para el cardView
-    public LibroTienda(int epl_id, String img, String titulo) {
+    public LibroTienda(int epl_id, String img) {
         this.epl_id = epl_id;
         this.img = img;
-        this.titulo = titulo;
     }
 
     public String getAutor() {
