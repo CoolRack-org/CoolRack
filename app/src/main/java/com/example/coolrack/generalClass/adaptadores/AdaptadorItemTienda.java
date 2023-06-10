@@ -1,8 +1,7 @@
 package com.example.coolrack.generalClass.adaptadores;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,11 @@ import java.util.List;
 public class AdaptadorItemTienda extends RecyclerView.Adapter<AdaptadorItemTienda.BookViewHolder> {
 
     private List<LibroTienda> books;
+    private Context context;
 
-    public AdaptadorItemTienda(List<LibroTienda> books){//, AdapterView.OnItemClickListener listener) {
+    public AdaptadorItemTienda(List<LibroTienda> books,Context context){//, AdapterView.OnItemClickListener listener) {
         this.books = books;
+        this.context = context;
         notifyDataSetChanged();
     }
 
@@ -39,14 +40,17 @@ public class AdaptadorItemTienda extends RecyclerView.Adapter<AdaptadorItemTiend
 
     @Override
     public void onBindViewHolder(BookViewHolder holder, int position) {
+        LibroTienda libroTienda = books.get(position);
         Glide.with(holder.itemView)
-                .load(books.get(position).getImg())//books.get(superPosition).getImg())
+                .load(libroTienda.getImg())//books.get(superPosition).getImg())
                 .into(holder.imageView);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,books.get(position).getImg());
+                context.startActivity(new Intent(context, com.example.coolrack.Activities.PerfilTienda.class)
+                        .putExtra("idBook",  libroTienda.getNodoName()) //books.get(position).getEpl_id())
+                );
             }
         });
     }

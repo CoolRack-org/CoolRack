@@ -51,7 +51,7 @@ public class Tienda extends AppCompatActivity implements AdaptadorItemTienda.OnI
         recyclerView.setLayoutManager(gridLayoutManager);
 
         librosList = new ArrayList<>();
-        adapter = new AdaptadorItemTienda(librosList);
+        adapter = new AdaptadorItemTienda(librosList, this);
         recyclerView.setAdapter(adapter);
 
         // Agregamos un listener al RecyclerView para detectar cuando se llega al final de la lista
@@ -88,9 +88,10 @@ public class Tienda extends AppCompatActivity implements AdaptadorItemTienda.OnI
                 List<LibroTienda> nuevosLibros = new ArrayList<>();
 
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    int epl_id = childSnapshot.child("epl_id").getValue(Integer.class); // obtener la clave del objeto (la ID)
+                    String nodoName = childSnapshot.getKey();
                     String imgDir = childSnapshot.child("imgDir").getValue(String.class); // obtener el valor del campo "titulo" como un String
-                    LibroTienda libro = new LibroTienda(epl_id, imgDir); // crear una instancia de Libro con los datos obtenidos
+
+                    LibroTienda libro = new LibroTienda(nodoName, imgDir); // crear una instancia de Libro con los datos obtenidos
                     nuevosLibros.add(libro); // agregar el libro a la lista de libros
                     Log.i(TAG, imgDir);
                 }

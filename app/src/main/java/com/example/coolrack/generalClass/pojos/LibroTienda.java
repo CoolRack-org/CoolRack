@@ -6,38 +6,31 @@ public class LibroTienda {
     private String coleccion;
     private String colsense;
     private String enlaces;
-    private int epl_id;
+    private String nodoName;
     private String estado;
-    private String fecha_publi;
+    private Long fecha_publi;
     private String genero;
     private String idioma;
     private String img;
     private String sinopsis;
-    private int paginas;
+    private Long paginas;
     private String titulo;
 
     // constructor completo
-    public LibroTienda(String autor, String autosense, String coleccion, String colsense, String enlaces, int epl_id, String estado, String fecha_publi, String genero, String idioma, String img, String sinopsis, int paginas, String titulo) {
-        this.autor = autor;
-        this.autosense = autosense;
-        this.coleccion = coleccion;
-        this.colsense = colsense;
-        this.enlaces = enlaces;
-        this.epl_id = epl_id;
-        this.estado = estado;
-        this.fecha_publi = fecha_publi;
-        this.genero = genero;
-        this.idioma = idioma;
-        this.img = img;
-        this.sinopsis = sinopsis;
-        this.paginas = paginas;
-        this.titulo = titulo;
-    }
+    public LibroTienda() {}
 
     // constructor para el cardView
-    public LibroTienda(int epl_id, String img) {
-        this.epl_id = epl_id;
+    public LibroTienda(String nodoName, String img) {
+       this.nodoName = nodoName;
         this.img = img;
+    }
+
+    public String getNodoName() {
+        return nodoName;
+    }
+
+    public void setNodoName(String nodoName) {
+        this.nodoName = nodoName;
     }
 
     public String getAutor() {
@@ -80,14 +73,6 @@ public class LibroTienda {
         this.enlaces = enlaces;
     }
 
-    public int getEpl_id() {
-        return epl_id;
-    }
-
-    public void setEpl_id(int epl_id) {
-        this.epl_id = epl_id;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -96,11 +81,11 @@ public class LibroTienda {
         this.estado = estado;
     }
 
-    public String getFecha_publi() {
+    public Long getFecha_publi() {
         return fecha_publi;
     }
 
-    public void setFecha_publi(String fecha_publi) {
+    public void setFecha_publi(Long fecha_publi) {
         this.fecha_publi = fecha_publi;
     }
 
@@ -136,11 +121,11 @@ public class LibroTienda {
         this.sinopsis = sinopsis;
     }
 
-    public int getPaginas() {
+    public Long getPaginas() {
         return paginas;
     }
 
-    public void setPaginas(int paginas) {
+    public void setPaginas(Long paginas) {
         this.paginas = paginas;
     }
 
