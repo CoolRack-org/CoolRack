@@ -1,8 +1,10 @@
 package com.example.coolrack.Activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,9 +24,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
 import com.example.coolrack.BuildConfig;
 import com.example.coolrack.R;
+import com.example.coolrack.generalClass.LocaleHelper;
 import com.example.coolrack.generalClass.MenuOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //valor que indica si el usuario acepto el permiso
@@ -35,11 +40,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public Menu fragmentsOptionsMenu;
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base, "en"));
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //verifica si la aplicacion tiene permisos, si no los tiene los pide y asigna
         verificarPermisos();
+        gestionDeIdiomas();
 
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
@@ -108,6 +119,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 default:
                     return super.onOptionsItemSelected(item);
             }}
+    }
+
+    // Analiza el idioma del sistema para cambiar el idioma de la app
+    private void gestionDeIdiomas(){
+        Locale currentLocale = getResources().getConfiguration().locale;
+        String language = currentLocale.getLanguage();
+
+        if (language.equals("es") || language.equals("en")) {
+            Locale.setDefault(currentLocale);
+            Configuration config = new Configuration();
+            config.locale = currentLocale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        } else {
+            // Establecer el idioma predeterminado de la aplicación en inglés
+            Locale.setDefault(Locale.ENGLISH);
+            Configuration config = new Configuration();
+            config.locale = Locale.ENGLISH;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 
 //-------------------------------------------------------------------------------------------------------------

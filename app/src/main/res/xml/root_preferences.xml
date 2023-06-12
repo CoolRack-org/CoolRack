@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:defaultValue="1"
             android:entries="@array/lenguages"
-            android:entryValues="@array/lenguages"
-            android:key="lenguage"
+            android:entryValues="@array/lenguages_codes"
+            android:key="lenguageMenu"
             android:title="@string/options_idioma" />
         <DropDownPreference
             android:id="@+id/info_options"
