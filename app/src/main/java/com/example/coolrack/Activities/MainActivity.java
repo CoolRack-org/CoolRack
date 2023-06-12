@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.coolrack.Activities.ui.main.MainFragments.Leyendo;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public Menu fragmentsOptionsMenu;
+    public NavigationView navigationView;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cajón y botón de retroceso para cerrar el cajón
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+        navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         //Pase el botón de alternancia Abrir y Cerrar para el detector de diseño de cajón
         //Para alternar el botón
@@ -81,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // se ejecuta cuando el usuario selecciona un item del menu de navegacion entre ventanas(fragments)
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Desmarca todas las opciones del menú
+        for (int i = 0; i < navigationView.getMenu().size(); i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+
+        // Marca la opción seleccionada
+        item.setChecked(true);
+        drawerLayout.closeDrawer(GravityCompat.START);
 
         //realiza la transicion entre fragmentos
         new MenuOptions(this).mainMenuSwitch(
