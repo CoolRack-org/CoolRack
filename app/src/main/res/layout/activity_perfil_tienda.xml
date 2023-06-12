@@ -28,6 +28,7 @@
 
 
 
+
             <TextView
                 android:id="@+id/titulo_perfil_tienda"
                 android:text="TITULO"
@@ -37,7 +38,15 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="30sp"/>
-
+            <TextView
+                android:id="@+id/magnetLink_perfil_tienda"
+                android:text="magnetLink"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

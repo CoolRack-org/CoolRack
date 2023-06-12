@@ -115,7 +115,7 @@ public class LecturaActivity extends AppCompatActivity {
             }
             else {
                 Log.i(TAG, "NO EXISTE EN LA BASE DE DATOS PERO SI EN EL DIRECTORIO DESCARGAS");
-                return new GenerateBooks(context).addLibroInDB(file);
+                return new GenerateBooks(context).addLibroInDB(file, true);
             }
         }
         else{
@@ -136,7 +136,7 @@ public class LecturaActivity extends AppCompatActivity {
 
             Log.i(TAG,"NO EXISTE NI EN LA BASE DE DATOS NI EN EL DIRECTORIO DESCARGAS");
 
-            return generateBooks.addLibroInDB(file);
+            return generateBooks.addLibroInDB(file, true);
         }
     }
 

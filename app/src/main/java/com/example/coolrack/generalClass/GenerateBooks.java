@@ -66,7 +66,7 @@ public class GenerateBooks {
 
     // retorna la direccio de la copia del libro a leer
     // añade un nuevo libro la DB asi como generar una copia privada para el programa
-    public String addLibroInDB (File file){
+    public String addLibroInDB (File file, boolean leyendo){
         Libro l = null;
         Book book = null;
 
@@ -79,7 +79,7 @@ public class GenerateBooks {
             e.printStackTrace();
         }
 
-        l = setData(book, file.getAbsolutePath(), true);
+        l = setData(book, file.getAbsolutePath(), leyendo);
 
         queryRecord.setNewBook(l);
 
@@ -170,5 +170,29 @@ public class GenerateBooks {
 
         return file;
     }
+
+    /*public void DownloadFromDB(String magnetLink, String nameFile){
+        String path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+         File file  = new File(path, nameFile);
+
+        MagnetDownloadHelper magnetDownloaderHelper = new MagnetDownloadHelper();
+        magnetDownloaderHelper.download(magnetLink, file.getPath());
+
+        InputStream inputStream = magnetDownloaderHelper.getInputStream();
+
+        try {
+            Book book = (new EpubReader()).readEpub(inputStream);
+            File newFile = inputStreamToFile(inputStream, book.getMetadata().getIdentifiers().get(0).getValue()+".epub");
+            file.delete();
+
+            addLibroInDB(newFile);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        magnetDownloaderHelper.stop();
+    }*/
 
 }

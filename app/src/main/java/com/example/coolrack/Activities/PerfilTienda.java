@@ -55,9 +55,11 @@ public class PerfilTienda extends AppCompatActivity {
                     Long paginasDB = (Long) nodo.child("paginas").getValue();
                     String sinopsisDB = (String) nodo.child("sinopsis").getValue();
                     String tituloDB = (String) nodo.child("titulo").getValue();
+                    Long idDB = (Long) nodo.child("epl_id").getValue();
 
                     // Rellenar los views de la interfaz con los datos obtenidos
                     TextView titulo = (TextView) findViewById(R.id.titulo_perfil_tienda);
+                    TextView magnetLink = (TextView) findViewById(R.id.magnetLink_perfil_tienda);
                     TextView autor = (TextView) findViewById(R.id.autor_perfil_tienda);
                     TextView coleccion = (TextView) findViewById(R.id.coleccion_perfil_tienda);
                     TextView sinopsis = (TextView) findViewById(R.id.sinopsis_perfil_tienda);
@@ -70,6 +72,7 @@ public class PerfilTienda extends AppCompatActivity {
                     enlaceDescarga = enlaceDB;
 
                     titulo.setText(tituloDB);
+                    magnetLink.setText(enlaceDB);
                     autor.setText(autorDB);
                     coleccion.setText(coleccionDB);
                     sinopsis.setText(sinopsisDB);
