@@ -5,21 +5,88 @@
     <!-- TODO: Remove or change this placeholder text -->
 
 
-    <!-- Opciones de menu Informacion de InformacionActivity ############################################################### -->
+
+    <!--MENU MAIN-->
+    <string name="mainMenu_leyendo">Leyendo</string>
+    <string name="mainMenu_biblioteca">Biblioteca</string>
+    <string name="mainMenu_favoritos">Favoritos</string>
+    <string name="mainMenu_para_leer">Para Leer</string>
+    <string name="mainMenu_leidos">Leidos</string>
+    <string name="mainMenu_papelera">Papelera</string>
+    <string name="mainMenu_biblioteca_publica">Biblioteca Publica</string>
+    <string name="mainMenu_opciones">Opciones</string>
+    <string name="mainMenu_informacion">Informacion</string>
+
+    <!--PERFIL LIBRO-->
+    <string name="perfil_autor">Autor</string>
+    <string name="perfil_serie">Serie</string>
+    <string name="perfil_idioma">Idioma</string>
+    <string name="perfil_identificador">Identificador</string>
+    <string name="perfil_direccion">Direccion</string>
+    <string name="tienda_perfil_menu_leer">LEER</string>
+
+    <!--TIENDA PERFIL LIBRO-->
+    <string name="tienda_perfil_coleccion">Coleccion</string>
+    <string name="tienda_perfil_fecha_publicacion">Fecha de publicacion</string>
+    <string name="tienda_perfil_genero">Genero</string>
+    <string name="tienda_perfil_paginas">Paginas</string>
+    <string name="tienda_perfil_sinopsis">Sinopsis</string>
+
+
+
+
+
+    <!--MENU INFORMACION-->
     <string name="title_activity_informacion">Informacion</string>
-    <string name="tab_text_1">Novedades</string>
-    <string name="tab_text_2">Nosotros</string>
-    <string name="tab_text_3">Mas info</string>
-    <string name="tab_text_4">Licencia</string>
+    <string name="infoMenu_novedades">Novedades</string>
+    <string name="infoMenu_nosotros">Nosotros</string>
+    <string name="infoMenu_mas_info">Mas info</string>
+    <string name="infoMenu_licenica">Licencia</string>
 
 
-    <string name="title_activity_settings">SettingsActivity</string>
+    <!--SETTINGS-->
+    <string name="title_activity_settings">Opciones</string>
+    <!--SETTINGS GENERAL-->
+    <string name="title_options_general">General</string>
+    <string name="options_buscarLibros">Buscar libros en el sistema</string>
+    <!--SETTINGS OTROS-->
+    <string name="title_options_otros">Otros</string>
+    <string name="options_idioma">Idioma / Language</string>
+    <string name="options_mas_info">Sobre CoolRack</string>
+
+    <!--POPUP PAPELERA-->
+    <string name="title_popup_papelera">Papelera Vacía</string>
+    <string name="popup_papelera_aviso">AVISO: Si no tiene los permisos activados no se podran borrar libros del sistema.</string>
+    <string name="popup_papelera_checkbox">Eliminar los archivos del dispositivo</string>
+    <string name="popup_papelera_resalto">Los documentos serán borrados de la aplicación</string>
+    <string name="popup_papelera_boton">LIMPIAR</string>
+
+    <!--ADAPTADOR ITEM-BOOK-->
+    <string name="item_book_drop_favoritos">Quitado de "Favoritos"</string>
+    <string name="item_book_add_favoritos">Agragado a "Favoritos"</string>
+    <string name="item_book_drop_paraLeer">Quitado de "Para Leer"</string>
+    <string name="item_book_add_paraLeer">Agragado a "Para Leer"</string>
+    <string name="item_book_drop_leidos">Quitado de "Leidos"</string>
+    <string name="item_book_add_leidos">Agragado a "Leidos"</string>
+    <string name="item_book_go_to_papelera">Libro enviado a la Papelera</string>
+
+
+
+    <!--ADAPTADOR ITEM-BOOK-PAPELERA-->
+    <string name="item_papelera_restauracion">Libro Restaurado</string>
+
+    <!--LEYENDO FRAGMENT-->
+    <string name="expulsion_lista">Documentos excluidos de la lista</string>
+
+    <!--ITEM PAPELERA-->
+    <string name="boton_item_papelera">RESTAURAR</string>
+
+
+
+
+
     <!-- Texto relacionado con el Activity Settings ####################################################################### -->
     <!-- Preference Titles -->
-    <string name="messages_header">General</string>
     <string name="lectura_header">Lectura</string>
-    <string name="otros_header">Otros</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

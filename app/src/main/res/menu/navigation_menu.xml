@@ -8,44 +8,44 @@
         <item
             android:id="@+id/nav_leyendo"
             android:icon="@drawable/ic_leyendo"
-            android:title="Leyendo" />
+            android:title="@string/mainMenu_leyendo" />
         <item
             android:id="@+id/nav_biblioteca"
             android:icon="@drawable/ic_biblioteca"
-            android:title="Biblioteca" />
+            android:title="@string/mainMenu_biblioteca" />
         <item
             android:id="@+id/nav_favorito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_star_border"
-            android:title="Favoritos" />
+            android:title="@string/mainMenu_favoritos" />
         <item
             android:id="@+id/nav_para_leer"
             android:icon="@drawable/ic_access_time"
-            android:title="Para Leer" />
+            android:title="@string/mainMenu_para_leer" />
         <item
             android:id="@+id/nav_leidos"
             android:icon="@drawable/ic_done_all"
-            android:title="Leidos" />
+            android:title="@string/mainMenu_leidos" />
         <item
             android:id="@+id/nav_papelera"
             android:icon="@drawable/ic_delete"
-            android:title="Papelera" />
+            android:title="@string/mainMenu_papelera" />
         <item
             android:id="@+id/nav_tienda"
             android:icon="@drawable/ic_tienda"
-            android:title="La gran Libreria" />
+            android:title="@string/mainMenu_biblioteca_publica" />
     </group>
 
     <group android:id="@+id/options">
         <item
             android:id="@+id/nav_opciones"
             android:icon="@drawable/ic_baseline_settings_24"
-            android:title="Opciones" />
+            android:title="@string/mainMenu_opciones" />
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_baseline_info_24"
-            android:title="Informacion" />
+            android:title="@string/mainMenu_informacion" />
     </group>
 
 </menu>

@@ -157,12 +157,12 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setFavorito(false);
                         bFaborito.setImageResource(R.drawable.ic_star_border);
 
-                        Snackbar.make(view,"Quitado de \"Favoritos\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_drop_favoritos,Snackbar.LENGTH_LONG).show();
                     } else {
                         libro.setFavorito(true);
                         bFaborito.setImageResource(R.drawable.ic_star_border_color);
 
-                        Snackbar.make(view,"Agragado a \"Favoritos\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_add_favoritos,Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
 
@@ -181,7 +181,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setParaLeer(false);
                         bParaLeer.setImageResource(R.drawable.ic_access_time);
 
-                        Snackbar.make(view,"Quitado de \"Para Leer\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_drop_paraLeer,Snackbar.LENGTH_LONG).show();
                     } else {
                         libro.setParaLeer(true);
                         bParaLeer.setImageResource(R.drawable.ic_access_time_color);
@@ -189,7 +189,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setLeido(false);
                         bLeidos.setImageResource(R.drawable.ic_done_all);
 
-                        Snackbar.make(view,"Agragado a \"Para Leer\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_add_paraLeer,Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
 
@@ -208,7 +208,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setLeido(false);
                         bLeidos.setImageResource(R.drawable.ic_done_all);
 
-                        Snackbar.make(view,"Quitado de \"Leidos\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_drop_leidos,Snackbar.LENGTH_LONG).show();
                     } else {
                         libro.setLeido(true);
                         bLeidos.setImageResource(R.drawable.ic_done_all_color);
@@ -216,7 +216,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                         libro.setParaLeer(false);
                         bParaLeer.setImageResource(R.drawable.ic_access_time);
 
-                        Snackbar.make(view,"Agragado a \"Leidos\"",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view,R.string.item_book_add_leidos,Snackbar.LENGTH_LONG).show();
                     }
                     queryRecord.updateBook(libro);
 
@@ -237,7 +237,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                     notifyDataSetChanged();
                     queryRecord.updateBook(libro);
 
-                    Snackbar.make(view,"Libro enviado a la Papelera",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,R.string.item_book_go_to_papelera,Snackbar.LENGTH_LONG).show();
 
                 }
             });

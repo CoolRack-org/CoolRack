@@ -118,7 +118,7 @@ public class AdaptadorItemPapelera extends RecyclerView.Adapter<AdaptadorItemPap
                     notifyDataSetChanged();
                     queryRecord.updateBook(libro);
 
-                    Snackbar.make(view,"Libro Restaurado",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,R.string.item_papelera_restauracion,Snackbar.LENGTH_LONG).show();
                 }
             });
 

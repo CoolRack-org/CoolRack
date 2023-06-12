@@ -40,7 +40,7 @@ public class Tienda extends AppCompatActivity implements AdaptadorItemTienda.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tienda);
 
-        setTitle("La gran biblioteca");
+        setTitle(R.string.mainMenu_biblioteca_publica);
 
         recyclerView = findViewById(R.id.recyclerViewTienda);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

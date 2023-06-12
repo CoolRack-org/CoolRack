@@ -4,6 +4,6 @@
     <item
         android:id="@+id/LeerPerfilBook"
         android:orderInCategory="300"
-        app:showAsAction="ifRoom"
-        android:title="LEER" />
+        android:title="@string/tienda_perfil_menu_leer"
+        app:showAsAction="ifRoom" />
 </menu>

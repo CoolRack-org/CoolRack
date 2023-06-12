@@ -47,12 +47,13 @@
                 android:gravity="center"
                 android:textIsSelectable="true"
                 android:textSize="15sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Autor"
                 android:layout_marginTop="20dp"
+                android:text="@string/perfil_autor"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -69,8 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Coleccion"
                 android:layout_marginTop="20dp"
+                android:text="@string/perfil_serie"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -99,8 +100,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Idioma"
                         android:layout_marginTop="20dp"
+                        android:text="@string/perfil_idioma"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -124,8 +125,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Fecha de publicacion"
                         android:layout_marginTop="20dp"
+                        android:text="@string/tienda_perfil_fecha_publicacion"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -157,8 +158,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Genero"
                         android:layout_marginTop="20dp"
+                        android:text="@string/tienda_perfil_genero"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -182,8 +183,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Paginas"
                         android:layout_marginTop="20dp"
+                        android:text="@string/tienda_perfil_paginas"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -206,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Sinopsis"
+                android:text="@string/tienda_perfil_sinopsis"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 

@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
-        setTitle("Settings");
+        setTitle(R.string.title_activity_settings);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()

@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.coolrack.R;
 import com.example.coolrack.generalClass.adaptadores.AdaptadorItemPapelera;
 import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.TransitionManager;
@@ -18,7 +19,7 @@ public class Papelera extends FatherMainFragment{
 
     @Override
     protected void personalizeFragment() {
-        getActivity().setTitle("Papelera");
+        getActivity().setTitle(R.string.mainMenu_papelera);
     }
 
     @Override

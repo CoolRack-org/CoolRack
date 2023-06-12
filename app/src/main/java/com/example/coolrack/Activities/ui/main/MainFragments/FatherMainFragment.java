@@ -59,7 +59,7 @@ public class FatherMainFragment extends Fragment {
 
     // Metodo que permite personalizar/realizar acciones nuevas cuando se ejecuta un onCreateView en un fragment hijo
     protected void personalizeFragment(){
-        getActivity().setTitle("Biblioteca");
+        getActivity().setTitle(R.string.mainMenu_biblioteca);
     }
 
     // Introduce los libros que se tienen que mostrar en un array para procesarlos

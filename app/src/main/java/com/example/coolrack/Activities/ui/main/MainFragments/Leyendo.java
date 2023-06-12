@@ -2,6 +2,7 @@ package com.example.coolrack.Activities.ui.main.MainFragments;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 
+import com.example.coolrack.R;
 import com.example.coolrack.generalClass.pojos.Libro;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ public class Leyendo extends FatherMainFragment{
     @Override
     protected void personalizeFragment() {
         this.seccion = "Leyendo";
-        getActivity().setTitle("Leyendo");
-        this.textoCallback = "Documentos excluidos de la lista";
+        getActivity().setTitle(R.string.mainMenu_leyendo);
+        this.textoCallback = String.valueOf(R.string.expulsion_lista);
 
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);

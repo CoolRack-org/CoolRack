@@ -13,7 +13,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Papelera Vacía"
+            android:text="@string/title_popup_papelera"
             android:textAlignment="center"
             android:textSize="34sp" />
 
@@ -21,7 +21,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AVISO: Si no tiene los permisos activados no se podran borrar libros del sistema."
+            android:text="@string/popup_papelera_aviso"
             android:textAlignment="center" />
 
         <CheckBox
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Eliminar los archivos del dispositivo" />
+            android:text="@string/popup_papelera_checkbox" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:id="@+id/textoAlertPapelera"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Los documentos serán borrados de la aplicación"
+                android:text="@string/popup_papelera_resalto"
                 android:textAlignment="center"
                 android:textColor="#7E7E7E"
                 android:textSize="24sp"
@@ -52,7 +52,7 @@
                 android:id="@+id/btnConfirmDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Limpiar"
+                android:text="@string/popup_papelera_boton"
                 android:textSize="20sp" />
         </LinearLayout>
 
