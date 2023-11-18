@@ -87,12 +87,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Desmarca todas las opciones del menú
-        for (int i = 0; i < navigationView.getMenu().size(); i++) {
-            navigationView.getMenu().getItem(i).setChecked(false);
+        // Las opciones del menu que pertenecen a un activity nunca se marcaran en el menu
+        if (item.getGroupId() != R.id.options && item.getItemId() != R.id.nav_tienda) {
+            for (int i = 0; i < navigationView.getMenu().size(); i++) {
+                navigationView.getMenu().getItem(i).setChecked(false);
+            }
+            item.setChecked(true);
+        }
+        else{
+            item.setChecked(false);
         }
 
-        // Marca la opción seleccionada
-        item.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
 
         //realiza la transicion entre fragmentos
