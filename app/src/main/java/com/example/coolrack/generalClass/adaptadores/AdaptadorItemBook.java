@@ -112,7 +112,7 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
     }
 
     private void createSnackbar(View view, int text, Libro libro, int option, int modelPosition){
-        Snackbar.make(view,text,Snackbar.LENGTH_LONG).setAction("DESHACER", v -> {
+        Snackbar.make(view,text,Snackbar.LENGTH_LONG).setAction(R.string.snackbar_cancel, v -> {
             personalizeCallback(libro, option, modelPosition);
             notifyDataSetChanged();
         }).show();

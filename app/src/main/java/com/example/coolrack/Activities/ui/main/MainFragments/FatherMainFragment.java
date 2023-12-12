@@ -101,7 +101,7 @@ public class FatherMainFragment extends Fragment {
             Log.i(TAG,libro.getTitle());
 
             Snackbar.make(linearLayout,textoCallback,Snackbar.LENGTH_LONG)
-                    .setAction("DESHACER", v -> {
+                    .setAction(R.string.snackbar_cancel, v -> {
                         personalizeCallback(libro);
                         listBook.add(position, libro);
                         adapterItem.notifyItemInserted(position);

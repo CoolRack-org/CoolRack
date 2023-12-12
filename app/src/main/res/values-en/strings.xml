@@ -3,6 +3,7 @@
     <string name="app_name">CoolRack</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="snackbar_cancel">CANCEL</string>
     <string name="title_activity_informacion">Information</string>
     <string name="tab_text_1">News</string>
     <string name="tab_text_2">About us</string>
