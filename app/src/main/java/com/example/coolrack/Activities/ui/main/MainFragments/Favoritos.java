@@ -15,7 +15,7 @@ public class Favoritos extends FatherMainFragment{
     protected void personalizeFragment() {
         this.seccion = "Favoritos";
         getActivity().setTitle(R.string.mainMenu_favoritos);
-        this.textoCallback = String.valueOf(R.string.item_book_drop_favoritos);
+        this.textoCallback = R.string.item_book_drop_favoritos;
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }
@@ -27,7 +27,7 @@ public class Favoritos extends FatherMainFragment{
 
     @Override
     protected void personalizeCallback(Libro libro) {
-        libro.setFavorito(false);
+        libro.setFavorito(!libro.getFavorito());
         queryRecord.updateBook(libro);
     }
 }

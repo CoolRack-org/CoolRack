@@ -15,7 +15,7 @@ public class Leidos extends FatherMainFragment{
     protected void personalizeFragment() {
         this.seccion = "Leidos";
         getActivity().setTitle(R.string.mainMenu_leidos);
-        this.textoCallback = String.valueOf(R.string.item_book_drop_leidos);
+        this.textoCallback = R.string.item_book_drop_leidos;
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
     }
@@ -27,7 +27,7 @@ public class Leidos extends FatherMainFragment{
 
     @Override
     protected void personalizeCallback(Libro libro) {
-        libro.setLeido(false);
+        libro.setLeido(!libro.getLeido());
         queryRecord.updateBook(libro);
     }
 }

@@ -92,11 +92,6 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                 holder.bParaLeer.setImageResource(R.drawable.ic_access_time_color);
             else
                 holder.bParaLeer.setImageResource(R.drawable.ic_access_time);
-        // Boton papelera
-            if (libro.getPapelera())
-                holder.bPapelera.setImageResource(R.drawable.ic_delete_color);
-            else
-                holder.bPapelera.setImageResource(R.drawable.ic_delete);
     }
 
     @Override
@@ -114,6 +109,68 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
         if (listener!=null){
             listener.onClick(view);
         }
+    }
+
+    private void createSnackbar(View view, int text, Libro libro, int option, int modelPosition){
+        Snackbar.make(view,text,Snackbar.LENGTH_LONG).setAction("DESHACER", v -> {
+            personalizeCallback(libro, option, modelPosition);
+            notifyDataSetChanged();
+        }).show();
+
+        // Update estado del libro en DB después que termine el Snackbar
+        personalizeCallback(libro, option, modelPosition);
+        notifyDataSetChanged();
+    }
+
+    private void personalizeCallback(Libro libro, int option, int modelPosition){
+        switch (option){
+            case 1: // favorito
+                if (!libro.getFavorito() && seccion.equals("Favoritos")){
+                    model.add(modelPosition, libro);
+                    notifyItemInserted(modelPosition);
+                }
+
+                libro.setFavorito(!libro.getFavorito());
+                break;
+
+            case 2: // paraLeer
+                libro.setParaLeer(!libro.getParaLeer());
+
+                if (libro.getLeido()){
+                    libro.setLeido(false);
+                }
+                if (libro.getParaLeer() && seccion.equals("Para Leer")){
+                    model.add(modelPosition, libro);
+                    notifyItemInserted(modelPosition);
+                }
+                break;
+
+            case 3: // leido
+                libro.setLeido(!libro.getLeido());
+
+                if (libro.getParaLeer()){
+                    libro.setParaLeer(false);
+                }
+
+                if (!libro.getLeido() && seccion.equals("Leyendo") || libro.getLeido() && seccion.equals("Leidos")) {
+                    model.add(modelPosition, libro);
+                    notifyItemInserted(modelPosition);
+                }
+                break;
+
+            case 4: //papelera
+                if (!libro.getPapelera()) {
+                    model.remove(modelPosition);
+                    notifyItemRemoved(modelPosition);
+                }
+                libro.setPapelera(!libro.getPapelera());
+                if (!libro.getPapelera()) {
+                    model.add(modelPosition, libro);
+                    notifyItemInserted(modelPosition);
+                }
+                break;
+        }
+        queryRecord.updateBook(libro);
     }
 
     //Constructor ViewHolder para el item
@@ -146,99 +203,80 @@ public class AdaptadorItemBook extends RecyclerView.Adapter<AdaptadorItemBook.Vi
                 }
             });
 
-            // cambia el color de la imagenes de los botones dependiendo de los booleanos del pojo
-            // Boton favorito
-
 // -------- Marca las acciones de los botones al hacer click y cambia sus colores ---------------------------------------------------------
             bFaborito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Integer text;
                     if (libro.getFavorito()){
-                        libro.setFavorito(false);
                         bFaborito.setImageResource(R.drawable.ic_star_border);
-
-                        Snackbar.make(view,R.string.item_book_drop_favoritos,Snackbar.LENGTH_LONG).show();
+                        text = R.string.item_book_drop_favoritos;
                     } else {
-                        libro.setFavorito(true);
                         bFaborito.setImageResource(R.drawable.ic_star_border_color);
-
-                        Snackbar.make(view,R.string.item_book_add_favoritos,Snackbar.LENGTH_LONG).show();
+                        text = R.string.item_book_add_favoritos;
                     }
-                    queryRecord.updateBook(libro);
+                    createSnackbar(view, text, libro, 1, getPosition());
 
-                    if (seccion == "Favoritos"){
+                    // si el libro se encuentra en el fragment "Favoritos"
+                    // al ser seleccionado en "Favoritos" se entiende que se elimina de la lista
+                    if (seccion.equals("Favoritos")){
                         model.remove(getPosition());
                         notifyDataSetChanged();
                     }
                 }
             });
-
 
             bParaLeer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Integer texto;
                     if (libro.getParaLeer()){
-                        libro.setParaLeer(false);
                         bParaLeer.setImageResource(R.drawable.ic_access_time);
-
-                        Snackbar.make(view,R.string.item_book_drop_paraLeer,Snackbar.LENGTH_LONG).show();
+                        texto = R.string.item_book_drop_paraLeer;
                     } else {
-                        libro.setParaLeer(true);
                         bParaLeer.setImageResource(R.drawable.ic_access_time_color);
-
-                        libro.setLeido(false);
                         bLeidos.setImageResource(R.drawable.ic_done_all);
-
-                        Snackbar.make(view,R.string.item_book_add_paraLeer,Snackbar.LENGTH_LONG).show();
+                        texto = R.string.item_book_add_paraLeer;
                     }
-                    queryRecord.updateBook(libro);
 
-                    if (seccion == "Leidos" || seccion == "Para Leer"){
+                    if (seccion.equals("Leidos") || seccion.equals("Para Leer")){
                         model.remove(getPosition());
                         notifyDataSetChanged();
                     }
+
+                    createSnackbar(view, texto,libro, 2, getPosition());
                 }
             });
-
 
             bLeidos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Integer texto;
                     if (libro.getLeido()){
-                        libro.setLeido(false);
                         bLeidos.setImageResource(R.drawable.ic_done_all);
-
-                        Snackbar.make(view,R.string.item_book_drop_leidos,Snackbar.LENGTH_LONG).show();
+                        texto = R.string.item_book_drop_leidos;
                     } else {
-                        libro.setLeido(true);
                         bLeidos.setImageResource(R.drawable.ic_done_all_color);
-
-                        libro.setParaLeer(false);
                         bParaLeer.setImageResource(R.drawable.ic_access_time);
-
-                        Snackbar.make(view,R.string.item_book_add_leidos,Snackbar.LENGTH_LONG).show();
+                        texto = R.string.item_book_add_leidos;
                     }
-                    queryRecord.updateBook(libro);
 
-                    if (seccion == "Leyendo" || seccion == "Leidos" || seccion == "Para Leer"){
+                    // Los libros con el estado "Leido" no pueden estar en las secciondes de "Leyendo" y "Para Leer"
+                    // a su vez, al ser seleccionado en "Leidos" entiende que se elimina de la lista
+                    if (seccion.equals("Leyendo") || seccion.equals("Leidos") || seccion.equals("Para Leer")){
                         model.remove(getPosition());
+                        notifyItemRemoved(getPosition());
                         notifyDataSetChanged();
                     }
+
+                    createSnackbar(view, texto, libro, 3, getPosition());
                 }
             });
 
             bPapelera.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    libro.setPapelera(true);
-                    queryRecord.updateBook(libro);
-
-                    model.remove(getPosition());
-                    notifyDataSetChanged();
-                    queryRecord.updateBook(libro);
-
-                    Snackbar.make(view,R.string.item_book_go_to_papelera,Snackbar.LENGTH_LONG).show();
-
+                    createSnackbar(view, R.string.item_book_go_to_papelera, libro, 4, getPosition());
                 }
             });
 

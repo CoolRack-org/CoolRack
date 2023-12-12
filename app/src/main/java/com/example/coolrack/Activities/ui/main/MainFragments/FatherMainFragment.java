@@ -2,6 +2,7 @@ package com.example.coolrack.Activities.ui.main.MainFragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.coolrack.generalClass.adaptadores.AdaptadorItemBook;
 import com.example.coolrack.generalClass.pojos.Libro;
 import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
 import com.example.coolrack.generalClass.TransitionManager;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class FatherMainFragment extends Fragment {
     protected ArrayList<Libro> listBook;
     protected LinearLayout linearLayout;
     protected String seccion = "";
-    protected String textoCallback = "";
+    protected Integer textoCallback;
 
     protected QueryRecord queryRecord;
 
@@ -94,14 +96,19 @@ public class FatherMainFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
             Libro libro = listBook.get(viewHolder.getAdapterPosition());
             Log.i(TAG,libro.getTitle());
 
-            // Update estado del libro en DB
+            Snackbar.make(linearLayout,textoCallback,Snackbar.LENGTH_LONG)
+                    .setAction("DESHACER", v -> {
+                        personalizeCallback(libro);
+                        listBook.add(position, libro);
+                        adapterItem.notifyItemInserted(position);
+
+            }).show();
+
             personalizeCallback(libro);
-
-            Snackbar.make(linearLayout,textoCallback,Snackbar.LENGTH_LONG).show();
-
             listBook.remove(viewHolder.getAdapterPosition());
             adapterItem.notifyDataSetChanged();
         }

@@ -15,7 +15,7 @@ public class Leyendo extends FatherMainFragment{
     protected void personalizeFragment() {
         this.seccion = "Leyendo";
         getActivity().setTitle(R.string.mainMenu_leyendo);
-        this.textoCallback = String.valueOf(R.string.expulsion_lista);
+        this.textoCallback = R.string.expulsion_lista;
 
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
@@ -29,7 +29,7 @@ public class Leyendo extends FatherMainFragment{
 
     @Override
     protected void personalizeCallback(Libro libro) {
-        libro.setLeyendo(false);
+        libro.setLeyendo(!libro.getLeyendo());
         queryRecord.updateBook(libro);
     }
 }
