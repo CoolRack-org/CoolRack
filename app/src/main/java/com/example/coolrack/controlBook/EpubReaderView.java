@@ -26,6 +26,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.coolrack.R;
+import com.example.coolrack.generalClass.SQLiteControll.QueryRecord;
+import com.example.coolrack.generalClass.pojos.Libro;
 
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
@@ -48,7 +50,10 @@ import nl.siegmann.epublib.epub.EpubReader;
 import nl.siegmann.epublib.service.MediatypeService;
 
 public class EpubReaderView extends WebView {
+    //metadata to book
     public Book book;
+    //book to DB of SQLite
+    public Libro saveBook;
     public ArrayList<Chapter> ChapterList = new ArrayList<Chapter>();
     private int ChapterNumber=0;
     private float Progress = 0;
@@ -58,6 +63,7 @@ public class EpubReaderView extends WebView {
     private long touchTime;
     private String ResourceLocation="";
     private Context context;
+    private QueryRecord queryRecord = QueryRecord.get(context);
     private android.view.ActionMode mActionMode = null;
     private SelectActionModeCallback actionModeCallback;
     private String seletedText ="";
@@ -465,6 +471,8 @@ public class EpubReaderView extends WebView {
                     // ignore
                 }
             }
+            saveBook = queryRecord.getLibroForPath(epub_location);
+            GotoPosition(saveBook.getLastPage(), saveBook.getReadProgress());
         }
     }
     private static void deleteFiles (File file){
@@ -551,6 +559,9 @@ public class EpubReaderView extends WebView {
                 return true;
             }
         });
+        saveBook.setLastPage(ChapterNumber);
+        saveBook.setReadProgress(Progress);
+        queryRecord.updateBook(saveBook);
     }
 
     public void ListChaptersDialog(int theme){

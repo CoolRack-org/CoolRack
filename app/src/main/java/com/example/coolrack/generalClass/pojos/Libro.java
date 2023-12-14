@@ -58,6 +58,12 @@ public class Libro  implements Serializable {
     @ColumnInfo(name = "img")
     private byte[] img;
 
+    @ColumnInfo(name = "lastPage")
+    private int lastPage = 0;
+
+    @ColumnInfo(name = "readProgress")
+    private float readProgress = 0;
+
     @Ignore
     private String urlImage;
 
@@ -67,6 +73,7 @@ public class Libro  implements Serializable {
     @Ignore
     public Libro() {}
 
+    // Basic constructor
     @Ignore
     public Libro(@NonNull int idRemoteDB, String title, String urlImage) {
         this.idRemoteDB = idRemoteDB;
@@ -74,8 +81,10 @@ public class Libro  implements Serializable {
         this.urlImage = urlImage;
     }
 
+    // Constructor to DB SQLite
     public Libro(@NonNull String identifier, String title, String author, String serie, String language, String originalBookUrl,
-                 String copyBookUrl, String format, boolean leyendo, boolean papelera, boolean favorito, boolean leido, boolean paraLeer, byte[] img) {
+                 String copyBookUrl, String format, boolean leyendo, boolean papelera, boolean favorito, boolean leido, boolean paraLeer,
+                 byte[] img, int lastPage, float readProgress) {
         this.identifier = identifier;
         this.title = title;
         this.author = author;
@@ -90,7 +99,32 @@ public class Libro  implements Serializable {
         this.leido = leido;
         this.paraLeer = paraLeer;
         this.img = img;
+        this.lastPage = lastPage;
+        this.readProgress = readProgress;
     }
+
+    // Constructor to class GenerateBooks
+/*    @Ignore
+    public Libro(@NonNull String identifier, String title, String author, String serie, String language, String originalBookUrl,
+                 String copyBookUrl, String format, boolean leyendo, boolean papelera, boolean favorito, boolean leido, boolean paraLeer,
+                 byte[] img) {
+        this.identifier = identifier;
+        this.title = title;
+        this.author = author;
+        this.serie = serie;
+        this.language = language;
+        this.originalBookUrl = originalBookUrl;
+        this.copyBookUrl = copyBookUrl;
+        this.format = format;
+        this.leyendo = leyendo;
+        this.papelera = papelera;
+        this.favorito = favorito;
+        this.leido = leido;
+        this.paraLeer = paraLeer;
+        this.img = img;
+        this.lastPage = 0;
+        this.readProgress = 0;
+    }*/
 
     public String getTitle() {
         return title;
@@ -214,6 +248,22 @@ public class Libro  implements Serializable {
 
     public String getUrlImage() {
         return urlImage;
+    }
+
+    public int getLastPage() {
+        return lastPage;
+    }
+
+    public void setLastPage(int lastPage) {
+        this.lastPage = lastPage;
+    }
+
+    public float getReadProgress() {
+        return readProgress;
+    }
+
+    public void setReadProgress(float readProgress) {
+        this.readProgress = readProgress;
     }
 
     public void setUrlImage(String urlImage) {

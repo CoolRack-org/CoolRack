@@ -101,6 +101,9 @@ public class GenerateBooks {
             l.setFormat("EPUB");
             l.setLeyendo(leyendo);
 
+            l.setReadProgress((float) 0);
+            l.setLastPage(0);
+
             l.setCopyBookUrl(createBook(b));
 
             Bitmap bitmap = null;

@@ -56,6 +56,8 @@ public class LecturaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lectura);
 
+        queryRecord =  QueryRecord.get(this);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         context = this.getApplicationContext();
@@ -81,7 +83,6 @@ public class LecturaActivity extends AppCompatActivity {
     // Genera la ruta necesaria para acceder al EPUB a leer
     // y modifica y/o lo añade a la base de datos en el grupo de LEYENDO
     private String getRealPath(){
-        QueryRecord queryRecord =  QueryRecord.get(this);
         File file = null;
         Libro libro = null;
         String displayName = null;
@@ -154,7 +155,6 @@ public class LecturaActivity extends AppCompatActivity {
         select_exit = (ImageView) findViewById(R.id.select_exit);
 
         ePubReader.OpenEpubFile(epub_location);
-        ePubReader.GotoPosition(0,(float)0);
 
         ePubReader.setEpubReaderListener(new EpubReaderView.EpubReaderListener() {
             @Override
