@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "886edb0501e6e3327c5eaa5f33a2e3ab",
+    "identityHash": "e2b9f146da548e9cb81669422d7e618e",
     "entities": [
       {
         "tableName": "book",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `title` TEXT, `author` TEXT, `serie` TEXT, `language` TEXT, `urlOriginal` TEXT, `urlCopy` TEXT, `format` TEXT, `leyendo` INTEGER NOT NULL, `papelera` INTEGER NOT NULL, `favorito` INTEGER NOT NULL, `leido` INTEGER NOT NULL, `paraLeer` INTEGER NOT NULL, `img` BLOB, PRIMARY KEY(`identifier`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `title` TEXT, `author` TEXT, `serie` TEXT, `language` TEXT, `urlOriginal` TEXT, `urlCopy` TEXT, `format` TEXT, `leyendo` INTEGER NOT NULL, `papelera` INTEGER NOT NULL, `favorito` INTEGER NOT NULL, `leido` INTEGER NOT NULL, `paraLeer` INTEGER NOT NULL, `img` BLOB, `lastPage` INTEGER NOT NULL, `readProgress` REAL NOT NULL, PRIMARY KEY(`identifier`))",
         "fields": [
           {
             "fieldPath": "identifier",
@@ -91,6 +91,18 @@
             "columnName": "img",
             "affinity": "BLOB",
             "notNull": false
+          },
+          {
+            "fieldPath": "lastPage",
+            "columnName": "lastPage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "readProgress",
+            "columnName": "readProgress",
+            "affinity": "REAL",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -106,7 +118,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '886edb0501e6e3327c5eaa5f33a2e3ab')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e2b9f146da548e9cb81669422d7e618e')"
     ]
   }
 }
