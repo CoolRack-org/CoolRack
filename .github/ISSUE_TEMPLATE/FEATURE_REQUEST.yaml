@@ -1,0 +1,31 @@
+name: 🚀 Feature Request
+description: Provide a request for a new feature or enhancement
+title: "[Enhancement]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Thank you for taking the time to fill this form!
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: "Provide a concise summary about the suggested feature."
+      placeholder: "Add a button that..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Detailed description
+      description: "Describe in detail the feature."
+    validations:
+      required: true
+  - type: textarea
+    id: technical
+    attributes:
+      label: (Optional) Technical description
+      description: "Describe how this feature works on a technical level."
+    validations:
+      required: false
