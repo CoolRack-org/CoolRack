@@ -4,7 +4,7 @@
 
 We take the security of our software products very seriously. If you have found any issues related to security, please send an email to us instead of using the issue tracker.
 
-📧 Email: jousejg@riseup.net
+📧 Email: coolracksupport@riseup.net
 
 We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
 
