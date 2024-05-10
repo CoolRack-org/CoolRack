@@ -232,16 +232,16 @@ public class EpubReaderView extends WebView {
             ProcessJavascript("var elements = document.getElementsByTagName('*');\n" +
                     "for (var i = 0; i < elements.length; i++) {\n" +
                     " if(elements[i].tagName!=\"SPAN\")\n" +
-                    "  elements[i].style.backgroundColor='white';\n" +
-                    " elements[i].style.color='black';\n" +
+                    "  elements[i].style.backgroundColor='#ffffff';\n" +
+                    " elements[i].style.color='#030303';\n" +
                     "}","changeTheme");
         }else{
             current_theme = THEME_DARK;
             ProcessJavascript("var elements = document.getElementsByTagName('*');\n" +
                     "for (var i = 0; i < elements.length; i++) {\n" +
                     " if(elements[i].tagName!=\"SPAN\")\n" +
-                    "  elements[i].style.backgroundColor='#1b1b1b';\n" +
-                    "elements[i].style.color='#fff';\n" +
+                    "  elements[i].style.backgroundColor='#2b2b2b';\n" +
+                    "elements[i].style.color='#adbece';\n" +
                     "}","changeTheme");
         }
     }
